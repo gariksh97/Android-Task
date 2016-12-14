@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "870743024033",
+    "firebase_url": "https://datrackchat.firebaseio.com",
+    "project_id": "datrackchat",
+    "storage_bucket": "datrackchat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870743024033:android:0b1e6e3fab4f3923",
+        "android_client_info": {
+          "package_name": "com.android_project.kt.datrackchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870743024033-d5tinbn048l5rt86ri9grojo6ot83h78.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrpUb8bawOpoFiW8vX54N1o-65h2Mg7Ao"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
