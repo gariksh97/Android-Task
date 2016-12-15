@@ -26,8 +26,8 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".TextMainActivityActivity" />
-        <activity android:name=".chat.ChatActivity"></activity>
+        <activity android:name=".oldchat.ChatActivity" />
+        <activity android:name=".AuthorizationActivity" />
     </application>
 
 </manifest>

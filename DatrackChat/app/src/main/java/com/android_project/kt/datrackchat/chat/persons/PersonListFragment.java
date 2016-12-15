@@ -1,8 +1,10 @@
-package com.android_project.kt.datrackchat.persons;
+package com.android_project.kt.datrackchat.chat.persons;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,7 +15,7 @@ import android.widget.TextView;
 
 import com.android_project.kt.datrackchat.MainActivity;
 import com.android_project.kt.datrackchat.R;
-import com.android_project.kt.datrackchat.chat.ChatActivity;
+import com.android_project.kt.datrackchat.chat.messages.DialogFragment;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -24,6 +26,7 @@ public class PersonListFragment extends Fragment {
 
     private DatabaseReference
             personDatabaseReference;
+
 
     private FirebaseRecyclerAdapter
             <PersonItem, PersonListFragment.PersonViewHolder>
@@ -47,13 +50,18 @@ public class PersonListFragment extends Fragment {
             userName = (TextView) itemView.findViewById(R.id.person_name);
         }
 
-        public void setListener(final Fragment fragment) {
+        public void setListener(final FragmentManager manager, final String friendName) {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(fragment.getActivity(), ChatActivity.class);
-                    intent.putExtra("friend", userName.getText());
-                    fragment.startActivity(intent);
+                    /*DialogFragment fragment = new DialogFragment();
+
+                    FragmentTransaction transaction = .beginTransaction();
+                    transaction.addToBackStack(null);
+                    transaction.replace(R.id.chat_fragment_layout, fragment);
+                    transaction.commit();
+
+                    manager.executePendingTransactions();*/
                 }
             });
         }
@@ -61,11 +69,14 @@ public class PersonListFragment extends Fragment {
 
     public PersonListFragment() {}
 
-    public static Fragment newInstance() {
+
+    public static Fragment newInstance(String value) {
         PersonListFragment fragment = new PersonListFragment();
 
         Bundle args = new Bundle();
+        args.putString("Key", value);
         fragment.setArguments(args);
+        Log.d("MyLog", "New Instance");
 
         return fragment;
     }
@@ -80,18 +91,19 @@ public class PersonListFragment extends Fragment {
         //layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
 
-        final Fragment thisFragment = this;
+        Log.d("MyLog", getArguments().get("Key").toString());
+
         personDatabaseReference = FirebaseDatabase.getInstance().getReference();
         adapter = new FirebaseRecyclerAdapter<PersonItem, PersonViewHolder>(
                 PersonItem.class,
                 R.layout.person_item,
                 PersonViewHolder.class,
-                personDatabaseReference.child(MainActivity.userName)) {
+                personDatabaseReference.child(MainActivity.userName).child("friends_list")) {
 
             @Override
             protected void populateViewHolder(PersonViewHolder viewHolder, PersonItem model, int position) {
                 viewHolder.userName.setText(model.getName());
-                viewHolder.setListener(thisFragment);
+                //viewHolder.setListener(rootFragmentManager, model.getName());
             }
         };
 

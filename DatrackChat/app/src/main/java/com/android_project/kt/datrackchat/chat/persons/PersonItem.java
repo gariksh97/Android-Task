@@ -1,4 +1,4 @@
-package com.android_project.kt.datrackchat.persons;
+package com.android_project.kt.datrackchat.chat.persons;
 
 /**
  * Created by garik on 14.12.16.

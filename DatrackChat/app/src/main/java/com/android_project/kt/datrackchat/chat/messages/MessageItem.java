@@ -1,14 +1,13 @@
-package com.android_project.kt.datrackchat.chat;
+package com.android_project.kt.datrackchat.chat.messages;
 
-public class ChatMessage {
+public class MessageItem {
 
     private String text;
     private String name;
 
-    public ChatMessage() {
-    }
+    public MessageItem() {}
 
-    public ChatMessage(String text, String name) {
+    public MessageItem(String text, String name) {
         this.text = text;
         this.name = name;
     }
@@ -28,4 +27,5 @@ public class ChatMessage {
     public void setName(String name) {
         this.name = name;
     }
+
 }
