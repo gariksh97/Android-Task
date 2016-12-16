@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,16 +29,15 @@ public class DialogFragment extends Fragment {
 
     public DialogFragment() {}
 
-    public void setFriendName(String friendName) {
-        this.friendName = friendName;
-    }
 
     public static Fragment newInstance(String friendName) {
         DialogFragment fragment = new DialogFragment();
-        fragment.setFriendName(friendName);
 
         Bundle args = new Bundle();
+        args.putString("friendName", friendName);
         fragment.setArguments(args);
+
+        Log.d("MyLog", "New Instance");
 
         return fragment;
     }
@@ -76,6 +76,8 @@ public class DialogFragment extends Fragment {
         layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
 
+        friendName = getArguments().getString("friendName");
+
         messagesDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
         adapter = new FirebaseRecyclerAdapter<MessageItem, DialogFragment.ChatMessageViewHolder>(
@@ -102,12 +104,14 @@ public class DialogFragment extends Fragment {
         sendButton = (Button) rootView.findViewById(R.id.send_button);
         sendMessageText = (EditText) rootView.findViewById(R.id.send_message_text);
 
-        messagesDatabaseReference.child(MainActivity.userName).child("dialogs").child(friendName).
+        messagesDatabaseReference.child(MainActivity.userName).child("dialogs").
+                child(friendName).child("messages").
                 addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        List messages = (List) dataSnapshot.getValue();
-                        if (messages != null) {
+                        Object value = dataSnapshot.getValue();
+                        if (value != null) {
+                            List messages = (List) value;
                             lastMessagePos = (long) messages.size();
                         } else {
                             lastMessagePos = 0L;
@@ -129,8 +133,8 @@ public class DialogFragment extends Fragment {
                         child(friendName).
                         child("messages").child(String.valueOf(lastMessagePos)).
                         setValue(newMessage);
-                messagesDatabaseReference.child(friendName).child(MainActivity.userName).
-                        child("dialogs").
+                messagesDatabaseReference.child(friendName).child("dialogs").
+                        child(MainActivity.userName).
                         child("messages").child(String.valueOf(lastMessagePos)).
                         setValue(newMessage);
 

@@ -16,6 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.plus.Plus;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -30,12 +31,13 @@ public class AuthorizationActivity extends AppCompatActivity
 
     private SignInButton authButton;
     private FirebaseAuth firebaseAuth;
-    private GoogleApiClient googleApiClient;
+    public static GoogleApiClient googleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_authorization);
+        setContentView(R.layout.auth_activity);
+
 
         authButton = (SignInButton) findViewById(R.id.auth_button);
         authButton.setOnClickListener(new View.OnClickListener() {
@@ -47,14 +49,30 @@ public class AuthorizationActivity extends AppCompatActivity
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         googleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .addApi(AppIndex.API).build();
+                .addApi(AppIndex.API)
+                .build();
+        googleApiClient.connect();
+        findViewById(R.id.button_later).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(AuthorizationActivity.this, MainActivity.class));
+                        finish();
+                    }
+                }
+        );
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
     }
 
 

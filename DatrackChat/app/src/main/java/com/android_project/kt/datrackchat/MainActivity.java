@@ -15,15 +15,16 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.plus.Plus;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity
-        implements  GoogleApiClient.OnConnectionFailedListener {
+        implements GoogleApiClient.OnConnectionFailedListener {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
-    public static String userName = "user";
+    public static String userName = "garikshgarik";
 
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mFirebaseAuth;
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
+        FirebaseAuth.getInstance().getCurrentUser();
+
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity
     public void onBackPressed() {
         int currentItem = mViewPager.getCurrentItem();
 
-        if (mSectionsPagerAdapter.fragments.get(currentItem).size() != 1) {
+        if (mSectionsPagerAdapter.fragments.get(currentItem).size() > 1) {
             mSectionsPagerAdapter.backFragment(getSupportFragmentManager(), currentItem);
             return;
         }
@@ -62,6 +65,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            menu.findItem(R.id.action_log_out).setTitle("Log in");
+        } else {
+            menu.findItem(R.id.action_log_out).setTitle("Log out");
+        }
         return true;
     }
 
@@ -73,9 +81,16 @@ public class MainActivity extends AppCompatActivity
             return true;
             //TODO: Добавить настройки
         } else if (id == R.id.action_log_out) {
-            mFirebaseAuth.signOut();
-            Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+            if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                FirebaseAuth.getInstance().signOut();
+
+                AuthorizationActivity.googleApiClient.clearDefaultAccountAndReconnect();
+                Intent loginActivity = new Intent(this, AuthorizationActivity.class);
+                startActivity(loginActivity);
+
+            }
             startActivity(new Intent(this, AuthorizationActivity.class));
+            finish();
             return true;
         }
 

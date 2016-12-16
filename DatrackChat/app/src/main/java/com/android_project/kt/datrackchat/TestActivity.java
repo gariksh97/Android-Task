@@ -1,33 +1,40 @@
-package com.android_project.kt.datrackchat.chat.persons;
+package com.android_project.kt.datrackchat;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android_project.kt.datrackchat.MainActivity;
-import com.android_project.kt.datrackchat.R;
-import com.android_project.kt.datrackchat.SectionsPagerAdapter;
 import com.android_project.kt.datrackchat.chat.messages.DialogFragment;
+import com.android_project.kt.datrackchat.chat.persons.PersonItem;
+import com.android_project.kt.datrackchat.chat.persons.PersonListFragment;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-//TODO:Chat
-public class PersonListFragment extends Fragment {
+/**
+ * Created by garik on 16.12.16.
+ */
+
+public class TestActivity extends AppCompatActivity {
+
     private static final int R_LAYOUT = R.layout.personlist_fragment_layout;
 
     private DatabaseReference
             personDatabaseReference;
 
 
-    private FirebaseRecyclerAdapter
-            <PersonItem, PersonListFragment.PersonViewHolder>
+    private FirebaseRecyclerAdapter<PersonItem, TestActivity.PersonViewHolder>
             firebaseAdapter;
 
     private RecyclerView
@@ -50,7 +57,7 @@ public class PersonListFragment extends Fragment {
             userName = (TextView) itemView.findViewById(R.id.person_name);
         }
 
-        public void setListener(final SectionsPagerAdapter adapter, final String friendName,
+        /*public void setListener(final SectionsPagerAdapter adapter, final String friendName,
                                 final Fragment rootFragment) {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -60,47 +67,28 @@ public class PersonListFragment extends Fragment {
 
                 }
             });
-        }
+        }*/
     }
-
-    public PersonListFragment() {}
-
-
-    public static Fragment newInstance
-            (SectionsPagerAdapter adapter) {
-        PersonListFragment fragment = new PersonListFragment();
-
-        Bundle args = new Bundle();
-        args.putParcelable("adapter", adapter);
-        fragment.setArguments(args);
-        Log.d("MyLog", "New Instance");
-
-        return fragment;
-    }
-
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R_LAYOUT, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.personlist_fragment_layout);
 
-        /*recyclerView = (RecyclerView) rootView.findViewById(R.id.person_list_recycler);
-        layoutManager = new LinearLayoutManager(this.getActivity());
+        recyclerView = (RecyclerView) findViewById(R.id.person_list_recycler);
+        layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        pagerAdapter = getArguments().getParcelable("adapter");
-
         personDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        firebaseAdapter = new FirebaseRecyclerAdapter<PersonItem, PersonViewHolder>(
+        firebaseAdapter = new FirebaseRecyclerAdapter<PersonItem, TestActivity.PersonViewHolder>(
                 PersonItem.class,
                 R.layout.person_item,
-                PersonViewHolder.class,
-                personDatabaseReference.child(MainActivity.userName).child("friends_list")) {
+                TestActivity.PersonViewHolder.class,
+                personDatabaseReference .child("friends_list")) {
 
             @Override
-            protected void populateViewHolder(PersonViewHolder viewHolder, PersonItem model, int position) {
+            protected void populateViewHolder(TestActivity.PersonViewHolder viewHolder, PersonItem model, int position) {
                 viewHolder.userName.setText(model.getName());
-                viewHolder.setListener(pagerAdapter, model.getName(), PersonListFragment.this);
             }
         };
 
@@ -112,10 +100,7 @@ public class PersonListFragment extends Fragment {
         });
 
 
-
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(firebaseAdapter);
-        */
-        return rootView;
     }
 }
