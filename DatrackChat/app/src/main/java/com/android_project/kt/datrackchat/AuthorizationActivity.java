@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android_project.kt.datrackchat.firebase.EmailToUid;
+import com.android_project.kt.datrackchat.firebase.FirebaseRequests;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.auth.api.Auth;
 
@@ -23,6 +25,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class AuthorizationActivity extends AppCompatActivity
         implements GoogleApiClient.OnConnectionFailedListener {
@@ -108,11 +111,19 @@ public class AuthorizationActivity extends AppCompatActivity
                         } else {
                             Intent intent = new Intent(AuthorizationActivity.this, MainActivity.class);
                             intent.putExtra("account", account);
+                            putEmailAndUidToDatabase(account);
                             startActivity(intent);
                             finish();
                         }
                     }
                 });
+    }
+
+    private void putEmailAndUidToDatabase(GoogleSignInAccount account) {
+        FirebaseRequests.pushUidByEmail(
+                account.getEmail(),
+                FirebaseAuth.getInstance().getCurrentUser().getUid()
+                );
     }
 
     @Override
