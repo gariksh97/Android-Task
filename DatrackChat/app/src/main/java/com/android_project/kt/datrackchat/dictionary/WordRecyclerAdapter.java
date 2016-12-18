@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android_project.kt.datrackchat.R;
+import com.android_project.kt.datrackchat.models.Word;
 
 import java.util.List;
 
