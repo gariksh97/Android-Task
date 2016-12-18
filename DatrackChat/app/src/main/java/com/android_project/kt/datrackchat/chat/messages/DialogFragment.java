@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.android_project.kt.datrackchat.MainActivity;
 import com.android_project.kt.datrackchat.R;
+import com.android_project.kt.datrackchat.chat.dialogs.DialogItem;
+import com.android_project.kt.datrackchat.firebase.FirebaseRequests;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,25 +27,60 @@ import java.util.List;
 
 public class DialogFragment extends Fragment {
     private static final int R_LAYOUT = R.layout.dialog_fragment_layout;
-    private String friendName;
+    private String dialogUid;
+    private View rootView;
 
-    public DialogFragment() {}
+    public void setDialogUid(String dialogUid) {
+        this.dialogUid = dialogUid;
+        restart();
+    }
+
+    private void restart() {
+
+        DatabaseReference messagesDatabaseReference =
+                FirebaseDatabase.getInstance().getReference();
+        if (rootView != null) {
+            if (adapter != null) {
+                adapter.cleanup();
+            }
+            adapter = new FirebaseRecyclerAdapter<MessageItem, DialogFragment.ChatMessageViewHolder>(
+                    MessageItem.class,
+                    R.layout.message_item,
+                    DialogFragment.ChatMessageViewHolder.class,
+                    FirebaseRequests.getDialog(dialogUid)) {
+
+                @Override
+                protected void populateViewHolder
+                        (DialogFragment.ChatMessageViewHolder viewHolder, MessageItem model, int position) {
+                    viewHolder.message.setText(model.getText());
+                    viewHolder.username.setText(model.getName());
+                }
+            };
+
+            adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+                @Override
+                public void onItemRangeInserted(int positionStart, int itemCount) {
+                    super.onItemRangeInserted(positionStart, itemCount);
+                }
+            });
+
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(adapter);
+        }
+    }
+
+    public DialogFragment() {
+    }
 
 
-    public static Fragment newInstance(String friendName) {
+    public static Fragment newInstance() {
         DialogFragment fragment = new DialogFragment();
 
         Bundle args = new Bundle();
-        args.putString("friendName", friendName);
         fragment.setArguments(args);
-
-        Log.d("MyLog", "New Instance");
 
         return fragment;
     }
-
-    private DatabaseReference
-            messagesDatabaseReference;
 
     private FirebaseRecyclerAdapter<MessageItem, DialogFragment.ChatMessageViewHolder>
             adapter;
@@ -52,8 +89,6 @@ public class DialogFragment extends Fragment {
 
     private Button sendButton;
     private EditText sendMessageText;
-
-    private Long lastMessagePos;
 
     public static class ChatMessageViewHolder extends RecyclerView.ViewHolder {
         TextView message;
@@ -69,58 +104,15 @@ public class DialogFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R_LAYOUT, container, false);
+        rootView = inflater.inflate(R_LAYOUT, container, false);
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.message_list_recycler);
         layoutManager = new LinearLayoutManager(this.getActivity());
         layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
 
-        friendName = getArguments().getString("friendName");
-
-        messagesDatabaseReference = FirebaseDatabase.getInstance().getReference();
-
-        adapter = new FirebaseRecyclerAdapter<MessageItem, DialogFragment.ChatMessageViewHolder>(
-                MessageItem.class,
-                R.layout.message_item,
-                DialogFragment.ChatMessageViewHolder.class,
-                messagesDatabaseReference.child(MainActivity.userName).
-                        child("dialogs").child(friendName).child("messages")) {
-
-            @Override
-            protected void populateViewHolder(DialogFragment.ChatMessageViewHolder viewHolder, MessageItem model, int position) {
-                viewHolder.message.setText(model.getText());
-                viewHolder.username.setText(model.getName());
-            }
-        };
-
-        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-            @Override
-            public void onItemRangeInserted(int positionStart, int itemCount) {
-                super.onItemRangeInserted(positionStart, itemCount);
-            }
-        });
-
         sendButton = (Button) rootView.findViewById(R.id.send_button);
         sendMessageText = (EditText) rootView.findViewById(R.id.send_message_text);
-
-        messagesDatabaseReference.child(MainActivity.userName).child("dialogs").
-                child(friendName).child("messages").
-                addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        Object value = dataSnapshot.getValue();
-                        if (value != null) {
-                            List messages = (List) value;
-                            lastMessagePos = (long) messages.size();
-                        } else {
-                            lastMessagePos = 0L;
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {}
-                });
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,23 +121,12 @@ public class DialogFragment extends Fragment {
                         MessageItem(sendMessageText.getText().toString(),
                         MainActivity.userName);
 
-                messagesDatabaseReference.child(MainActivity.userName).child("dialogs").
-                        child(friendName).
-                        child("messages").child(String.valueOf(lastMessagePos)).
-                        setValue(newMessage);
-                messagesDatabaseReference.child(friendName).child("dialogs").
-                        child(MainActivity.userName).
-                        child("messages").child(String.valueOf(lastMessagePos)).
-                        setValue(newMessage);
-
-                sendMessageText.setText("") ;
+                FirebaseRequests.pushMessage(dialogUid, newMessage);
+                sendMessageText.setText("");
             }
         });
 
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
-
-
+        restart();
         return rootView;
     }
 }

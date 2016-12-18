@@ -2,14 +2,11 @@ package com.android_project.kt.datrackchat.dictionary;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android_project.kt.datrackchat.game.GameFragment;
 import com.android_project.kt.datrackchat.R;
-import com.android_project.kt.datrackchat.chat.persons.PersonListFragment;
 
 //TODO: Словарь
 public class DictionaryFragment extends Fragment {
