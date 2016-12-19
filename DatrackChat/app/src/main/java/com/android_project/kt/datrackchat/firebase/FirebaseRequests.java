@@ -76,7 +76,7 @@ public class FirebaseRequests {
     }
 
     public static void pushMessage(DialogItem dialogItem, MessageItem item) {
-        getDialogMessages(dialogItem.getDialog_uid()).push().setValue(item);
+        getDialog(dialogItem.getDialog_uid()).push().setValue(item);
         Log.d("MyLog", dialogItem.getDialog_uid());
         dialogItem.setData(item.getData());
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference()

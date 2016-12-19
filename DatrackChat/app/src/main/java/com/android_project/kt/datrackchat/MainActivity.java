@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity
         );
 
         fragmentMap.put("DialogList", DialogListFragment.newInstance(this));
-        fragmentMap.put("Dictionary", DictionaryFragment.newInstance());
+        fragmentMap.put("Dictionary", DictionaryFragment.newInstance(this));
         fragmentMap.put("Game", GameFragment.newInstance());
         fragmentMap.put("Dialog", DialogFragment.newInstance());
         tabLayout.getTabAt(0).select();
