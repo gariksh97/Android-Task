@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android_project.kt.datrackchat.MainActivity;
 import com.android_project.kt.datrackchat.R;
 import com.android_project.kt.datrackchat.models.Word;
 
@@ -29,7 +30,10 @@ public class GameFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R_LAYOUT, container, false);
+        MainActivity activity = getArguments().getParcelable("activity");
+        SharedPreferences sPrefs = activity.getSharedPreferences("dictionary.xml", Context.MODE_PRIVATE);
         return rootView;
     }
 }
