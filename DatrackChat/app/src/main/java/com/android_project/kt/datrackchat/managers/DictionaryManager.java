@@ -2,11 +2,15 @@ package com.android_project.kt.datrackchat.managers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
+import android.util.Log;
 import android.util.Pair;
 
 import com.android_project.kt.datrackchat.MainActivity;
+import com.android_project.kt.datrackchat.R;
 import com.android_project.kt.datrackchat.models.Word;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,33 +18,39 @@ import java.util.List;
  */
 
 public class DictionaryManager {
-    private static List<String> russianDictionary;
-    private static List<String> nativeDictionary;
+    private static TypedArray russianDictionary;
+    private static TypedArray nativeDictionary;
+    private static List<Word> dictionary;
 
     private void getDictionaries(MainActivity activity) {
         if (russianDictionary != null) return;
-        SharedPreferences sPrefs = activity.getSharedPreferences("dictionary.xml", Context.MODE_PRIVATE);
-        for (String str: sPrefs.getStringSet("russianDictionary", null)) {
-            russianDictionary.add(str);
+        nativeDictionary = activity.getResources().obtainTypedArray(R.array.nativeDictionary);
+        russianDictionary = activity.getResources().obtainTypedArray(R.array.russianDictionary);
+        dictionary = new ArrayList<>();
+        for (int i = 0; i < nativeDictionary.length(); ++i) {
+            dictionary.add(new Word(nativeDictionary.getString(i), russianDictionary.getString(i)));
         }
-        for (String str: sPrefs.getStringSet("nativeDictionary", null)) {
-            nativeDictionary.add(str);
-        }
+        Log.d(LOG, "got dictionaries");
     }
 
-    public List<String> getRussianDictionary(MainActivity activity) {
+    public TypedArray getRussianDictionary(MainActivity activity) {
         getDictionaries(activity);
         return russianDictionary;
     }
 
-    public List<String> getNativeDictionary(MainActivity activity) {
+    public TypedArray getNativeDictionary(MainActivity activity) {
         getDictionaries(activity);
         return nativeDictionary;
     }
 
+    public List<Word> getWholeDictionary(MainActivity activity) {
+        getDictionaries(activity);
+        return dictionary;
+    }
+
     public Word getWord(Integer ind, MainActivity activity) {
         getDictionaries(activity);
-        return new Word(nativeDictionary.get(ind), russianDictionary.get(ind));
+        return new Word(nativeDictionary.getString(ind), russianDictionary.getString(ind));
     }
 
     /*
@@ -53,9 +63,11 @@ public class DictionaryManager {
     }
     public Boolean checkWord(String word, MainActivity activity) {
         getDictionaries(activity);
-        for (String str: nativeDictionary) {
-            if (word.equals(str)) return true;
+        for (int i = 0; i < nativeDictionary.length(); ++i) {
+            if (word.equals(nativeDictionary.getString(i))) return true;
         }
         return false;
     }
+
+    final String LOG = "DictioanryManager";
 }

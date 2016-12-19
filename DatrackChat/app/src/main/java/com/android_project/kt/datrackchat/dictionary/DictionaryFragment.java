@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.android_project.kt.datrackchat.MainActivity;
 import com.android_project.kt.datrackchat.R;
+import com.android_project.kt.datrackchat.managers.DictionaryManager;
 import com.android_project.kt.datrackchat.models.Word;
 
 import java.util.ArrayList;
@@ -61,12 +62,7 @@ public class DictionaryFragment extends Fragment {
         MainActivity activity = getArguments().getParcelable("activity");
         recyclerView = (RecyclerView) rootView.findViewById(R.id.dict_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        TypedArray nativeDict = getResources().obtainTypedArray(R.array.nativeDictionary);
-        TypedArray russianDict = getResources().obtainTypedArray(R.array.russianDictionary);
-        dictionary = new ArrayList<>();
-        for (int i = 0; i < nativeDict.length(); ++i) {
-            dictionary.add(new Word(nativeDict.getString(i), russianDict.getString(i)));
-        }
+        if (dictionary == null) dictionary = (new DictionaryManager()).getWholeDictionary(activity);
         if (adapter == null) {
             adapter = new WordRecyclerAdapter(getContext(), dictionary);
         }
@@ -80,5 +76,5 @@ public class DictionaryFragment extends Fragment {
         super.onSaveInstanceState(outState);
     }
 
-    final String LOG = "DictFragment";
+    final String LOG = "DictionaryFragment";
 }
