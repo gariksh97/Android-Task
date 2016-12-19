@@ -54,7 +54,7 @@ public class DialogFragment extends Fragment {
                 protected void populateViewHolder
                         (DialogFragment.ChatMessageViewHolder viewHolder, MessageItem model, int position) {
                     viewHolder.message.setText(model.getText());
-                    viewHolder.username.setText(model.getName());
+                    viewHolder.username.setText(FirebaseRequests.decode(model.getName()));
                 }
             };
 
