@@ -1,32 +1,16 @@
 package com.android_project.kt.datrackchat.firebase;
 
-import android.net.Credentials;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Handler;
 import android.util.Log;
 
 import com.android_project.kt.datrackchat.addfriend.FriendItem;
 import com.android_project.kt.datrackchat.chat.dialogs.DialogItem;
 import com.android_project.kt.datrackchat.chat.messages.MessageItem;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.fitness.data.Value;
-import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.MutableData;
-import com.google.firebase.database.Transaction;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.Map;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by garik on 17.12.16.
@@ -41,6 +25,7 @@ public class FirebaseRequests {
     }
 
     public static String decode(String s) {
+        if (Uri.decode(s) == null) return s;
         return Uri.decode(
                 Uri.decode(s).replaceAll("%252", "\\.")
         );
@@ -66,7 +51,7 @@ public class FirebaseRequests {
     public static DatabaseReference getCurrentUserDialogs() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         return FirebaseDatabase.getInstance().getReference()
-                .child("dialogs_list").child(user.getUid());
+                .child("dialogs_list").child(user.getUid()).orderByChild("data").getRef();
     }
 
     public static DatabaseReference getDialogs() {
@@ -76,19 +61,32 @@ public class FirebaseRequests {
 
     public static DatabaseReference getDialog(String dialogUid) {
         return FirebaseDatabase.getInstance().getReference()
-                .child("dialogs").child(dialogUid);
+                .child("dialogs")
+                .child(dialogUid)
+                .child("messages");
     }
 
     public static DatabaseReference getDialogMessages(String dialogUid) {
-        return getDialog(dialogUid).orderByChild("data").getRef();
+        return getDialog(dialogUid).child("messages")
+                .orderByChild("data").getRef();
     }
 
     public static String getDialogSize(String dialogUid) {
         return getDialogMessages(dialogUid).limitToLast(1).getRef().getKey();
     }
 
-    public static void pushMessage(String dialogUid, MessageItem item) {
-        getDialogMessages(dialogUid).push().setValue(item);
+    public static void pushMessage(DialogItem dialogItem, MessageItem item) {
+        getDialogMessages(dialogItem.getDialog_uid()).push().setValue(item);
+        Log.d("MyLog", dialogItem.getDialog_uid());
+        dialogItem.setData(item.getData());
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
+                .child("dialogs_list");
+        reference.child(dialogItem.getFirst_user_uid())
+                .child(dialogItem.getDialog_uid())
+                .setValue(dialogItem);
+        reference.child(dialogItem.getSecond_user_uid())
+                .child(dialogItem.getDialog_uid())
+                .setValue(dialogItem);
     }
 
     public static void addFriend(FriendItem friendItem) {
@@ -100,13 +98,21 @@ public class FirebaseRequests {
         dialog.child("users").child(friendItem.getUid()).setValue(true);
 
         DialogItem dialogItem = new DialogItem();
-        dialogItem.setUid(dialog.getKey());
+        dialogItem.setDialog_uid(dialog.getKey());
+        dialogItem.setFirst_user_uid(user.getUid());
+        dialogItem.setSecond_user_uid(friendItem.getUid());
 
         dialogItem.setName(friendItem.getName());
-        databaseReference.child("dialogs_list").child(user.getUid()).push().setValue(dialogItem);
+        databaseReference.child("dialogs_list")
+                .child(user.getUid())
+                .child(dialogItem.getDialog_uid())
+                .setValue(dialogItem);
 
         dialogItem.setName(encode(user.getDisplayName()));
-        databaseReference.child("dialogs_list").child(friendItem.getUid()).push().setValue(dialogItem);
+        databaseReference.child("dialogs_list")
+                .child(friendItem.getUid())
+                .child(dialogItem.getDialog_uid())
+                .setValue(dialogItem);
     }
 
 
