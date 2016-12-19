@@ -10,56 +10,64 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:text="Next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button8"
-            android:layout_weight="1" />
-
-        <Button
             android:text="Change"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button7"
+            android:id="@+id/change_but"
             android:layout_weight="1" />
+
+        <Button
+            android:text="Next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/next_but"
+            android:layout_weight="1" />
+
     </LinearLayout>
 
     <TextView
         android:text="А что если тут много-много разных букав"
         android:layout_width="match_parent"
-        android:id="@+id/textView4"
+        android:id="@+id/problem_label"
         android:layout_height="250dp"
         android:fontFamily="serif-monospace"
         android:textSize="30sp"
-        android:gravity="top|bottom"
+        android:gravity="top|bottom|center"
         android:clickable="false" />
+
+    <TextView
+        android:text="Нужно выбрать верный перевод"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView5"
+        android:gravity="center" />
 
     <Button
         android:text="answer 1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/button2"
+        android:id="@+id/ans1"
         android:layout_weight="0.1"/>
 
     <Button
         android:text="Answer 2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/button3"
+        android:id="@+id/ans2"
         android:layout_weight="0.1"/>
 
     <Button
         android:text="Answer 3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/button4"
+        android:id="@+id/ans3"
         android:layout_weight="0.1"/>
 
     <Button
         android:text="Answer 4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/button5"
+        android:id="@+id/ans4"
         android:layout_marginBottom="0dp"
         android:layout_weight="0.1"/>
 
