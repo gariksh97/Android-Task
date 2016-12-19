@@ -48,7 +48,7 @@ public class DialogListFragment extends Fragment {
                     activity.isDialog = true;
                     activity.changeFragment("Dialog", 0);
                     ((DialogFragment) activity.fragmentMap.get("Dialog"))
-                            .setDialogUid(model.getUid());
+                            .setDialog(model);
 
                 }
             });
@@ -96,7 +96,7 @@ public class DialogListFragment extends Fragment {
 
             @Override
             protected void populateViewHolder(DialogViewHolder viewHolder, DialogItem model, int position) {
-                viewHolder.userName.setText(model.getName());
+                viewHolder.userName.setText(FirebaseRequests.decode(model.getName()));
                 viewHolder.setListener(model, mainActivity);
             }
         };

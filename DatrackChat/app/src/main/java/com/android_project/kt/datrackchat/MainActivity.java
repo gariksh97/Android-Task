@@ -4,27 +4,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.android_project.kt.datrackchat.addfriend.AddFriendActivity;
 import com.android_project.kt.datrackchat.chat.dialogs.DialogListFragment;
 import com.android_project.kt.datrackchat.chat.messages.DialogFragment;
 import com.android_project.kt.datrackchat.dictionary.DictionaryFragment;
 import com.android_project.kt.datrackchat.game.GameFragment;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.HashMap;
@@ -61,7 +54,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_new);
+        setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -111,7 +104,7 @@ public class MainActivity extends AppCompatActivity
         );
 
         fragmentMap.put("DialogList", DialogListFragment.newInstance(this));
-        fragmentMap.put("Dictionary", DictionaryFragment.newInstance(this));
+        fragmentMap.put("Dictionary", DictionaryFragment.newInstance());
         fragmentMap.put("Game", GameFragment.newInstance());
         fragmentMap.put("Dialog", DialogFragment.newInstance());
         tabLayout.getTabAt(0).select();

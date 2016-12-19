@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,27 +11,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android_project.kt.datrackchat.MainActivity;
 import com.android_project.kt.datrackchat.R;
 import com.android_project.kt.datrackchat.chat.dialogs.DialogItem;
 import com.android_project.kt.datrackchat.firebase.FirebaseRequests;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.List;
 
 public class DialogFragment extends Fragment {
     private static final int R_LAYOUT = R.layout.dialog_fragment_layout;
-    private String dialogUid;
+    private DialogItem dialog;
     private View rootView;
 
-    public void setDialogUid(String dialogUid) {
-        this.dialogUid = dialogUid;
+    public void setDialog(DialogItem dialog) {
+        this.dialog = dialog;
         restart();
     }
 
@@ -48,7 +41,7 @@ public class DialogFragment extends Fragment {
                     MessageItem.class,
                     R.layout.message_item,
                     DialogFragment.ChatMessageViewHolder.class,
-                    FirebaseRequests.getDialog(dialogUid)) {
+                    FirebaseRequests.getDialog(dialog.getDialog_uid())) {
 
                 @Override
                 protected void populateViewHolder
@@ -123,12 +116,16 @@ public class DialogFragment extends Fragment {
                         FirebaseAuth.getInstance().getCurrentUser().getDisplayName()
                 );
 
-                FirebaseRequests.pushMessage(dialogUid, newMessage);
+                FirebaseRequests.pushMessage(getDialog(), newMessage);
                 sendMessageText.setText("");
             }
         });
 
         restart();
         return rootView;
+    }
+
+    public DialogItem getDialog() {
+        return dialog;
     }
 }
