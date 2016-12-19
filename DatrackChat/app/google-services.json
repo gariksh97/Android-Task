@@ -15,6 +15,30 @@
       },
       "oauth_client": [
         {
+          "client_id": "870743024033-srr06kir6rgt5s6agd8sd0q7162iat1h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android_project.kt.datrackchat",
+            "certificate_hash": "0BEE5C5E005DC11C84D668E3C956CA51FD14F6A8"
+          }
+        },
+        {
+          "client_id": "870743024033-d69ulso0tsk8oe9odfk2gbbct55dsail.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android_project.kt.datrackchat",
+            "certificate_hash": "6A072C8330AA69E949A053EFC89BFEEF2E46AA8C"
+          }
+        },
+        {
+          "client_id": "870743024033-57tgkk0sctqdnechrr9tq07vhc196vuu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android_project.kt.datrackchat",
+            "certificate_hash": "7B4F7C25EF62AA6E642E2C54D8A9AA1C581B1A22"
+          }
+        },
+        {
           "client_id": "870743024033-d5tinbn048l5rt86ri9grojo6ot83h78.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +53,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870743024033-d5tinbn048l5rt86ri9grojo6ot83h78.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
