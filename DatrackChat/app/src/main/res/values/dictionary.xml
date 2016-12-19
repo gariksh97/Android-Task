@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="russianDictionary">
+        <item>заставить замолчать</item>
+        <item>зловонный</item>
+        <item>вонь</item>
+        <item>дурно пахнуть</item>
+        <item>есть</item>
+        <item>кормить</item>
+        <item>кормить</item>
+        <item>полночь</item>
+        <item>транспортировать</item>
+        <item>проливать</item>
+        <item>убить</item>
+        <item>стул</item>
+        <item>черепаха</item>
+        <item>утро</item>
+        <item>жаркий</item>
+        <item>теплый</item>
+        <item>звук, использующийся, чтобы успокоить лошадь или ребенка</item>
+        <item>заменять</item>
+        <item>согревать</item>
+        <item>когда</item>
+        <item>мыть</item>
+        <item>летать</item>
+        <item>рвать</item>
+        <item>снег</item>
+        <item>зима</item>
+        <item>срывать, расстраивать</item>
+        <item>точить, заострять</item>
+        <item>тогда</item>
+        <item>да</item>
+        <item>ночью</item>
+        <item>сейчас</item>
+        <item>два</item>
+        <item>второй</item>
+        <item>кроме того, даже</item>
+        <item>так же</item>
+        <item>лидер</item>
+        <item>решить</item>
+        <item>вставай</item>
+        <item>вставать</item>
+        <item>больше</item>
+        <item>утка</item>
+        <item>больше</item>
+        <item>просить</item>
+        <item>дальше</item>
+        <item>обещать</item>
+        <item>украшать</item>
+        <item>ковылять</item>
+        <item>играть на музыкальном инструменте</item>
+        <item>опустошать</item>
+        <item>отдыхать</item>
+        <item>ковылять</item>
+        <item>я</item>
+        <item>меня</item>
+        <item>остановить</item>
+        <item>закончить</item>
+        <item>оставлять что-то в одиночестве</item>
+        <item>объявление</item>
+        <item>мой</item>
+        <item>ранить</item>
+        <item>поощрять</item>
+        <item>глубокий</item>
+        <item>держать рядом</item>
+        <item>дотракийский крюкообразный меч</item>
+        <item>бросить</item>
+        <item>можно пренебречь</item>
+        <item>стыдить</item>
+        <item>порицание</item>
+        <item>тема</item>
+        <item>трус</item>
+        <item>прятаться</item>
+        <item>душить</item>
+        <item>тогда, когда</item>
+        <item>чинить</item>
+        <item>пугать</item>
+        <item>падать</item>
+        <item>падать</item>
+        <item>небо</item>
+        <item>слово</item>
+        <item>клюква</item>
+        <item>река</item>
+        <item>клятва</item>
+        <item>сломать</item>
+        <item>сегодня</item>
+        <item>день рождения</item>
+        <item>введение</item>
+        <item>подарить</item>
+        <item>знак</item>
+        <item>пророчество</item>
+        <item>побеждать</item>
+        <item>послание</item>
+        <item>командовать</item>
+        <item>говорить</item>
+        <item>шутить</item>
+        <item>молитва</item>
+        <item>говорить</item>
+        <item>один</item>
+        <item>первый</item>
+        <item>сухой</item>
+        <item>несчастье</item>
+        <item>глубина</item>
+        <item>пустошь</item>
+        <item>ерунда</item>
+        <item>ожидание</item>
+        <item>пространство</item>
+        <item>уважение</item>
+        <item>приветствие к группе людей</item>
+        <item>хромота</item>
+        <item>польза</item>
+        <item>скорость</item>
+        <item>удобство</item>
+        <item>смерть</item>
+        <item>ночной кошмар</item>
+        <item>закат</item>
+        <item>возвращение</item>
+        <item>отбытие</item>
+        <item>танец</item>
+        <item>любовь</item>
+        <item>уверенность</item>
+        <item>секс</item>
+        <item>секс, во время которого женщина находится сверху</item>
+        <item>гордость</item>
+        <item>обсуждение</item>
+        <item>поправка</item>
+        <item>свадьба</item>
+        <item>бег</item>
+        <item>плач</item>
+        <item>волнение</item>
+        <item>отдых</item>
+        <item>магия</item>
+        <item>жестокость,</item>
+        <item>боль</item>
+        <item>нечувствительность к боли</item>
+        <item>разрушение</item>
+        <item>сушить</item>
+        <item>ярость</item>
+        <item>страх</item>
+        <item>внешний вид</item>
+        <item>великолепный</item>
+        <item>война</item>
+        <item>мудрость</item>
+        <item>рождение</item>
+        <item>надежда</item>
+        <item>болезнь</item>
+        <item>любовь (между возлюбленными)</item>
+        <item>размер</item>
+        <item>опасность</item>
+        <item>один</item>
+        <item>первый</item>
+        <item>грязь</item>
+        <item>разрушить</item>
+        <item>одиннадцать</item>
+        <item>жизнь</item>
+        <item>сон</item>
+        <item>показывать</item>
+        <item>отец</item>
+        <item>встать на колени</item>
+        <item>сжечь</item>
+        <item>выращивать</item>
+        <item>никогда</item>
+        <item>крикун</item>
+        <item>кричать</item>
+        <item>колокольчик</item>
+        <item>ждать</item>
+        <item>всегда</item>
+        <item>лезвие</item>
+        <item>благословение</item>
+        <item>давать</item>
+        <item>подарок</item>
+        <item>работорговец</item>
+        <item>поработить</item>
+        <item>навредить</item>
+        <item>опустить</item>
+        <item>ветер</item>
+        <item>наемник</item>
+        <item>климат</item>
+        <item>осень</item>
+        <item>тихий</item>
+        <item>молчать</item>
+        <item>боб</item>
+        <item>слышать</item>
+        <item>ухо</item>
+        <item>слушать</item>
+        <item>или</item>
+        <item>хороший</item>
+        <item>саранча</item>
+        <item>печень</item>
+        <item>половина мили</item>
+        <item>ехать легким галопом</item>
+        <item>темно-гнедая лошадь</item>
+        <item>с темно-коричневой кожей</item>
+        <item>семьдесят</item>
+        <item>сверчок</item>
+        <item>человек-сверчок</item>
+        <item>лечь</item>
+        <item>лежащий</item>
+        <item>пятьдесят</item>
+        <item>женщина</item>
+        <item>жена</item>
+        <item>девяносто</item>
+        <item>почти</item>
+        <item>тридцать</item>
+        <item>сорок</item>
+        <item>рог</item>
+        <item>шестьдесят</item>
+        <item>заслуживающий уважения</item>
+        <item>уважать</item>
+        <item>честь</item>
+        <item>становиться более уважаемым</item>
+        <item>быть трудным</item>
+        <item>затвердеть</item>
+        <item>пищуха</item>
+        <item>восемьдесят</item>
+        <item>катить</item>
+        <item>свежий</item>
+        <item>свекла</item>
+        <item>свекольная паста</item>
+        <item>шутливое слово для чего-то сзади</item>
+        <item>лист</item>
+        <item>зеленый</item>
+        <item>трава определенного вида</item>
+        <item>гранат</item>
+        <item>тысяча</item>
+        <item>корова, говядина</item>
+        <item>драгоценный камень</item>
+        <item>очистка леса</item>
+        <item>седло</item>
+        <item>хромой</item>
+        <item>острый</item>
+        <item>хороший, полезный</item>
+        <item>быть полезным</item>
+        <item>полезная вещь</item>
+        <item>розмарин</item>
+        <item>кровные всадники, воины, поклявшиеся жизнью служить кхалу</item>
+        <item>ездок</item>
+        <item>вражеская орда, в просторечии употребляется для обозначения любой орды</item>
+        <item>бесполезный</item>
+        <item>сжать</item>
+        <item>раздеваться</item>
+        <item>сперма</item>
+        <item>ответить</item>
+        <item>улыбнуться</item>
+        <item>улыбка</item>
+        <item>ворота</item>
+        <item>Конные ворота (вход в Ваэс Дотрак)</item>
+        <item>входить</item>
+        <item>ребёнок</item>
+        <item>хороший, добрый</item>
+        <item>старый</item>
+        <item>гладкий</item>
+        <item>выход</item>
+        <item>выходить</item>
+        <item>изменить</item>
+        <item>возвращаться</item>
+        <item>хвост</item>
+        <item>вода</item>
+        <item>ядовитая вода</item>
+        <item>начинать</item>
+        <item>оливка</item>
+        <item>оливковое масло</item>
+        <item>оливковая косточка</item>
+        <item>все, всё, каждый</item>
+        <item>дождь</item>
+        <item>весна</item>
+        <item>находить</item>
+        <item>танцевать</item>
+        <item>танцующий</item>
+        <item>змея</item>
+        <item>сильный</item>
+        <item>кошка</item>
+        <item>лошадь</item>
+        <item>безжизненный, ненастоящий</item>
+        <item>хозяин</item>
+        <item>победа</item>
+        <item>ведро</item>
+        <item>бить</item>
+        <item>кожа</item>
+        <item>молодой</item>
+        <item>сестра</item>
+        <item>пить</item>
+        <item>хрупкий</item>
+        <item>дикий, бешеный</item>
+        <item>запрещённый</item>
+        <item>хвост из волос, традиционная прическа дотракийских воинов</item>
+        <item>луна</item>
+        <item>пес</item>
+        <item>пони, малорослая лошадь</item>
+        <item>лишить свободы</item>
+        <item>тянуть</item>
+        <item>готовить</item>
+        <item>готовая еда</item>
+        <item>посуда для готовки еды</item>
+        <item>закрытый</item>
+        <item>время</item>
+        <item>чёрный</item>
+        <item>союзник</item>
+        <item>личная охрана</item>
+        <item>тело</item>
+        <item>дотракийский военачальник, вождь кхаласара</item>
+        <item>клан дотрактйцев</item>
+        <item>жена кхала</item>
+        <item>червь</item>
+        <item>таким образом, поэтому</item>
+        <item>предок</item>
+        <item>мы</item>
+        <item>наше</item>
+        <item>охрана</item>
+        <item>целитель</item>
+        <item>целительница</item>
+        <item>воин</item>
+        <item>войско</item>
+        <item>сражаться</item>
+        <item>язык</item>
+        <item>стрела</item>
+        <item>кролик</item>
+        <item>все это знают</item>
+        <item>они</item>
+        <item>ворон</item>
+        <item>кровь</item>
+        <item>кровь моей крови, обращение между кхалом и его кровными всадниками</item>
+        <item>свинья</item>
+        <item>мальчик</item>
+        <item>земли</item>
+        <item>Ночные Земли, загробный мир дотракийской религии</item>
+        <item>животное</item>
+        <item>мой</item>
+        <item>да</item>
+        <item>грязь</item>
+        <item>восток</item>
+        <item>юго-восток</item>
+        <item>северо-восток</item>
+        <item>город</item>
+        <item>горизонт</item>
+        <item>волк</item>
+        <item>жеребец</item>
+        <item>жеребец, который покроет весь мир</item>
+        <item>Великий Жеребец, бог, которому поклоняются дотракийцы</item>
+        <item>женщина</item>
+        <item>великий</item>
+        <item>статуя</item>
+        <item>нет</item>
+        <item>ты</item>
+        <item>белый</item>
+        <item>ящерица</item>
+        <item>дракон</item>
+        <item>частица, ставящаяся перед обращением</item>
+    </string-array>
+
+    <string-array name="nativeDictionary">
+        <item>acchakat</item>
+        <item>achra</item>
+        <item>achrakh</item>
+        <item>achralat</item>
+        <item>adakhat</item>
+        <item>adakhilat</item>
+        <item>addakhat</item>
+        <item>addo ajjalani</item>
+        <item>addothralat</item>
+        <item>addrekat</item>
+        <item>addrivat</item>
+        <item>ador</item>
+        <item>adra</item>
+        <item>aena</item>
+        <item>afazh</item>
+        <item>afazhi</item>
+        <item>affa</item>
+        <item>affazolat</item>
+        <item>affazhat</item>
+        <item>affin</item>
+        <item>affisat</item>
+        <item>afis</item>
+        <item>aggendat</item>
+        <item>ahesh</item>
+        <item>aheshke</item>
+        <item>ahhaqat</item>
+        <item>ahhasat</item>
+        <item>ahhaz</item>
+        <item>ai</item>
+        <item>ajjalan</item>
+        <item>ajjin</item>
+        <item>akat</item>
+        <item>akataki</item>
+        <item>akka</item>
+        <item>akkate</item>
+        <item>akkelenak</item>
+        <item>akkelenat</item>
+        <item>Akko</item>
+        <item>akkovarat</item>
+        <item>ale</item>
+        <item>alegra</item>
+        <item>alikh</item>
+        <item>allayafat</item>
+        <item>alle</item>
+        <item>alloshat</item>
+        <item>ammasat</item>
+        <item>ammattelat</item>
+        <item>ammemat</item>
+        <item>ammenat</item>
+        <item>ammithrat</item>
+        <item>anat</item>
+        <item>anha</item>
+        <item>anna</item>
+        <item>annakhat</item>
+        <item>annakholat</item>
+        <item>annevalat</item>
+        <item>annese</item>
+        <item>anni</item>
+        <item>annithat</item>
+        <item>annithilat</item>
+        <item>ao</item>
+        <item>aqqisat</item>
+        <item>arakh</item>
+        <item>aranat</item>
+        <item>arannat</item>
+        <item>arranat</item>
+        <item>arrane</item>
+        <item>aranikh</item>
+        <item>aresak</item>
+        <item>aresat</item>
+        <item>arraggat</item>
+        <item>arrek</item>
+        <item>arrissat</item>
+        <item>arrokhat</item>
+        <item>arthasat</item>
+        <item>arthasolat</item>
+        <item>asavva</item>
+        <item>ase</item>
+        <item>asfavirzeth</item>
+        <item>ashefa</item>
+        <item>asqoyi</item>
+        <item>assamvat</item>
+        <item>asshekh</item>
+        <item>asshekhqoyi</item>
+        <item>asshie</item>
+        <item>asshilat</item>
+        <item>assikhqoyi</item>
+        <item>assikhqoyisir</item>
+        <item>assilat</item>
+        <item>assokh</item>
+        <item>assolat</item>
+        <item>astat</item>
+        <item>astilat</item>
+        <item>asto</item>
+        <item>astolat</item>
+        <item>at</item>
+        <item>ataki</item>
+        <item>ath</item>
+        <item>athaddrivar</item>
+        <item>athaozar</item>
+        <item>athasar</item>
+        <item>athastokhdeveshizar</item>
+        <item>athayozar</item>
+        <item>athchilar</item>
+        <item>athchomar</item>
+        <item>athchomar chomakea</item>
+        <item>athdarinar</item>
+        <item>athdavrazar</item>
+        <item>athdikar</item>
+        <item>athdisizar</item>
+        <item>athdrivar</item>
+        <item>athdrivarido</item>
+        <item>athdrivar shekhi</item>
+        <item>athessazar</item>
+        <item>athezar</item>
+        <item>athezhirar</item>
+        <item>athfiezar</item>
+        <item>athgoshar</item>
+        <item>athhilezar</item>
+        <item>athijezar</item>
+        <item>athjahakar</item>
+        <item>athjerizar</item>
+        <item>athjilar</item>
+        <item>athkemar</item>
+        <item>athlanar</item>
+        <item>athlaqar</item>
+        <item>athmanimvenar</item>
+        <item>athmithrar</item>
+        <item>athmovezar</item>
+        <item>athniqar</item>
+        <item>athnithar</item>
+        <item>athnithmenar</item>
+        <item>athohharar</item>
+        <item>atholat</item>
+        <item>athostar</item>
+        <item>athrokhar</item>
+        <item>athtihar</item>
+        <item>athvezhvenar</item>
+        <item>athvilajerar</item>
+        <item>athvillar</item>
+        <item>athyolar</item>
+        <item>athzalar</item>
+        <item>athzhikhar</item>
+        <item>athzhilar</item>
+        <item>athzhokwazar</item>
+        <item>athzhowakar</item>
+        <item>ato</item>
+        <item>atte</item>
+        <item>atthar</item>
+        <item>atthasat</item>
+        <item>atthi</item>
+        <item>atthirar</item>
+        <item>atthirarido</item>
+        <item>attihat</item>
+        <item>ave</item>
+        <item>avvemolat</item>
+        <item>avvirsalat</item>
+        <item>avvitisherat</item>
+        <item>avvos</item>
+        <item>awazak</item>
+        <item>awazat</item>
+        <item>ayena</item>
+        <item>ayolat</item>
+        <item>ayyey</item>
+        <item>az</item>
+        <item>azhasavva</item>
+        <item>azhat</item>
+        <item>azho</item>
+        <item>azzafrok</item>
+        <item>azzafrolat</item>
+        <item>azzisat</item>
+        <item>azzohat</item>
+        <item>chaf</item>
+        <item>chafak</item>
+        <item>chafasar</item>
+        <item>chafka</item>
+        <item>chak</item>
+        <item>chakat</item>
+        <item>chal</item>
+        <item>charat</item>
+        <item>chare</item>
+        <item>haro</item>
+        <item>che</item>
+        <item>chek</item>
+        <item>chelsian</item>
+        <item>cheno</item>
+        <item>chetira</item>
+        <item>chetirat</item>
+        <item>cheyao</item>
+        <item>cheyaoven</item>
+        <item>chifekh</item>
+        <item>chifti</item>
+        <item>chiftik</item>
+        <item>chilat</item>
+        <item>chilay</item>
+        <item>chimek</item>
+        <item>chiori</item>
+        <item>chiorikem</item>
+        <item>chiqazat</item>
+        <item>chir</item>
+        <item>chisen</item>
+        <item>chitor</item>
+        <item>chiva</item>
+        <item>chizhinda</item>
+        <item>chomak</item>
+        <item>chomat</item>
+        <item>chomokh</item>
+        <item>chomolat</item>
+        <item>chongat</item>
+        <item>chongolat</item>
+        <item>choo</item>
+        <item>chori</item>
+        <item>chorkat</item>
+        <item>chosh</item>
+        <item>chot</item>
+        <item>chotteya</item>
+        <item>choyo</item>
+        <item>daeni</item>
+        <item>dahaan</item>
+        <item>dahana</item>
+        <item>daki</item>
+        <item>dalen</item>
+        <item>dalfe</item>
+        <item>dan</item>
+        <item>dana</item>
+        <item>darif</item>
+        <item>darin</item>
+        <item>dave</item>
+        <item>davra</item>
+        <item>davralat</item>
+        <item>davrakh</item>
+        <item>davveya</item>
+        <item>dothrakhqoyi</item>
+        <item>dothraki</item>
+        <item>dozgosor</item>
+        <item>edavrasa</item>
+        <item>efat</item>
+        <item>ekhogaralat</item>
+        <item>elain</item>
+        <item>elzat</item>
+        <item>emat</item>
+        <item>eme</item>
+        <item>emrakh</item>
+        <item>Emrakh Hrazefi</item>
+        <item>emralat</item>
+        <item>enta</item>
+        <item>erin</item>
+        <item>ershe</item>
+        <item>es</item>
+        <item>esemrasakh</item>
+        <item>esemrasalat</item>
+        <item>esinasolat</item>
+        <item>essalat</item>
+        <item>eve</item>
+        <item>eveth</item>
+        <item>evethiz</item>
+        <item>evolat</item>
+        <item>ewe</item>
+        <item>ewekh</item>
+        <item>ewweya</item>
+        <item>eyak</item>
+        <item>eyel</item>
+        <item>eyelke</item>
+        <item>ezat</item>
+        <item>ezhirat</item>
+        <item>ezhiray</item>
+        <item>gezri</item>
+        <item>haj</item>
+        <item>havzi</item>
+        <item>hrazef</item>
+        <item>ido</item>
+        <item>idrik</item>
+        <item>iffi</item>
+        <item>igge</item>
+        <item>ildat</item>
+        <item>ilek</item>
+        <item>imesh</item>
+        <item>inavva</item>
+        <item>indelat</item>
+        <item>ithkoil</item>
+        <item>ivezh</item>
+        <item>izven</item>
+        <item>jahak</item>
+        <item>jalan</item>
+        <item>jano</item>
+        <item>jedda</item>
+        <item>jervat</item>
+        <item>jesat</item>
+        <item>jolinat</item>
+        <item>jolinikh</item>
+        <item>jolino</item>
+        <item>jon</item>
+        <item>kashi</item>
+        <item>kazga</item>
+        <item>kemik</item>
+        <item>kha</item>
+        <item>khado</item>
+        <item>khal</item>
+        <item>khalasar</item>
+        <item>khaleesi</item>
+        <item>khewo</item>
+        <item>kijinosi</item>
+        <item>kim</item>
+        <item>kisha</item>
+        <item>kishi</item>
+        <item>ko</item>
+        <item>koalak</item>
+        <item>koalakeesi</item>
+        <item>lajak</item>
+        <item>lajasar</item>
+        <item>lajat</item>
+        <item>lekh</item>
+        <item>loqam</item>
+        <item>mawizzi</item>
+        <item>me nem nesa</item>
+        <item>mori</item>
+        <item>nhizo</item>
+        <item>qoy</item>
+        <item>qoy qoyi</item>
+        <item>qifo</item>
+        <item>rakh</item>
+        <item>rhaeshi</item>
+        <item>Rhaeshi Ajjalani</item>
+        <item>rhoa</item>
+        <item>sajo</item>
+        <item>sek</item>
+        <item>sorfo</item>
+        <item>tith</item>
+        <item>heshtith</item>
+        <item>valshtith</item>
+        <item>vaes</item>
+        <item>valad</item>
+        <item>ver</item>
+        <item>vezh</item>
+        <item>vezh fin saja rhaesheseres</item>
+        <item>vezhof</item>
+        <item>vikeesi</item>
+        <item>vezhven</item>
+        <item>vojjor</item>
+        <item>vos</item>
+        <item>yer</item>
+        <item>zasqa</item>
+        <item>zhav</item>
+        <item>zhavvorsa</item>
+        <item>zhey</item>
+    </string-array>
+</resources>
