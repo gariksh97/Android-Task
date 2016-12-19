@@ -1,15 +1,21 @@
 package com.android_project.kt.datrackchat.chat.messages;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.Html;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android_project.kt.datrackchat.R;
 import com.android_project.kt.datrackchat.chat.dialogs.DialogItem;
@@ -19,10 +25,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+
 public class DialogFragment extends Fragment {
     private static final int R_LAYOUT = R.layout.dialog_fragment_layout;
     private DialogItem dialog;
     private View rootView;
+    private boolean isMessageTryToSend;
+    private boolean isChangedText;
 
     public void setDialog(DialogItem dialog) {
         this.dialog = dialog;
@@ -30,7 +39,8 @@ public class DialogFragment extends Fragment {
     }
 
     private void restart() {
-
+        isMessageTryToSend = false;
+        isChangedText = false;
         DatabaseReference messagesDatabaseReference =
                 FirebaseDatabase.getInstance().getReference();
         if (rootView != null) {
@@ -109,23 +119,97 @@ public class DialogFragment extends Fragment {
         sendMessageText = (EditText) rootView.findViewById(R.id.send_message_text);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
-                MessageItem newMessage = new
-                        MessageItem(sendMessageText.getText().toString(),
-                        FirebaseAuth.getInstance().getCurrentUser().getDisplayName()
-                );
+                if (sendMessageText.getText().toString().trim().equals(""))
+                    return;
 
-                FirebaseRequests.pushMessage(getDialog(), newMessage);
-                sendMessageText.setText("");
+                boolean anyNotDatrackWord = false;
+
+                if (!isMessageTryToSend) {
+                    StringBuilder newMessageText = new StringBuilder();
+                    String text = sendMessageText.getText().toString();
+                    String parts[] = text.split("\\s+");
+                    String words[] = new String[parts.length];
+                    for (int i = 0; i < parts.length; i++) {
+                        words[i] = parts[i].replaceAll("[^\\w]", "");
+                        if (!words[i].equals("") && true) {
+                            anyNotDatrackWord = true;
+                            newMessageText.append("<font color=#63a34a>")
+                                    .append(parts[i])
+                                    .append("</font>").append(" ");
+                        } else {
+                            newMessageText.append(parts[i]).append(" ");
+                        }
+                    }
+                    if (anyNotDatrackWord) {
+                        Toast.makeText(
+                                getContext(),
+                                "Some words are not in datrack",
+                                Toast.LENGTH_LONG
+                        ).show();
+                        sendMessageText.setText(Html.fromHtml(
+                                newMessageText.toString()
+                        ));
+                        isMessageTryToSend = true;
+                        isChangedText = false;
+                    } else {
+                        sendMessage();
+                        isMessageTryToSend = false;
+                    }
+                } else {
+                    sendMessage();
+                    isMessageTryToSend = false;
+                }
             }
         });
 
+        sendMessageText.addTextChangedListener(
+                new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        isMessageTryToSend = false;
+                        if (!isChangedText) {
+                            StringBuilder newMessageText = new StringBuilder();
+                            String text = sendMessageText.getText().toString();
+                            String parts[] = text.split("\\s+");
+                            for (int iter = 0; iter < parts.length; iter++) {
+                                newMessageText.append(parts[iter]).append(" ");
+                            }
+                            sendMessageText.setText(newMessageText.toString());
+                            isChangedText = true;
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
         restart();
+
         return rootView;
     }
 
     public DialogItem getDialog() {
         return dialog;
+    }
+
+    private void sendMessage() {
+        MessageItem newMessage = new
+                MessageItem(sendMessageText.getText().toString(),
+                FirebaseAuth.getInstance().getCurrentUser().getDisplayName()
+        );
+
+        isChangedText = true;
+        isMessageTryToSend = false;
+        FirebaseRequests.pushMessage(getDialog(), newMessage);
+        sendMessageText.setText("");
     }
 }
