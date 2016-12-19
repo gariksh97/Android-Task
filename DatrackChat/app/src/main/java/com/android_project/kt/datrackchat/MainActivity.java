@@ -26,48 +26,18 @@ import com.android_project.kt.datrackchat.game.GameFragment;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity
-        implements GoogleApiClient.OnConnectionFailedListener,
-        Parcelable {
-
-    private ViewPager mViewPager;
-    public static MainActivity thisMainActivity;
+        implements Parcelable {
 
     private TabLayout tabLayout;
-
-    public static String userName = "garikshgarik";
 
     public Map<String, Fragment> fragmentMap;
     private Fragment selectedFragment;
     public boolean isDialog = false;
-
-    private GoogleApiClient mGoogleApiClient;
-    private FirebaseAuth mFirebaseAuth;
-    private FirebaseUser mFirechatUser;
-
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        thisMainActivity = this;
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
-    }*/
 
     protected MainActivity(Parcel in) {
     }
@@ -97,9 +67,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         fragmentMap = new HashMap<>();
-
-
-        //mViewPager = (ViewPager) findViewById(R.id.fragment_container);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.addTab(tabLayout.newTab().setText("Chat"));
@@ -144,7 +111,7 @@ public class MainActivity extends AppCompatActivity
         );
 
         fragmentMap.put("DialogList", DialogListFragment.newInstance(this));
-        fragmentMap.put("Dictionary", DictionaryFragment.newInstance());
+        fragmentMap.put("Dictionary", DictionaryFragment.newInstance(this));
         fragmentMap.put("Game", GameFragment.newInstance());
         fragmentMap.put("Dialog", DialogFragment.newInstance());
         tabLayout.getTabAt(0).select();
@@ -214,11 +181,6 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
     }
 
     @Override

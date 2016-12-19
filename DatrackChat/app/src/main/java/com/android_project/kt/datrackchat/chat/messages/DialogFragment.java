@@ -17,6 +17,7 @@ import com.android_project.kt.datrackchat.R;
 import com.android_project.kt.datrackchat.chat.dialogs.DialogItem;
 import com.android_project.kt.datrackchat.firebase.FirebaseRequests;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -119,7 +120,8 @@ public class DialogFragment extends Fragment {
             public void onClick(View view) {
                 MessageItem newMessage = new
                         MessageItem(sendMessageText.getText().toString(),
-                        MainActivity.userName);
+                        FirebaseAuth.getInstance().getCurrentUser().getDisplayName()
+                );
 
                 FirebaseRequests.pushMessage(dialogUid, newMessage);
                 sendMessageText.setText("");
