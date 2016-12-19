@@ -31,7 +31,8 @@
         android:layout_height="250dp"
         android:fontFamily="serif-monospace"
         android:textSize="30sp"
-        android:gravity="top|bottom" />
+        android:gravity="top|bottom"
+        android:clickable="false" />
 
     <Button
         android:text="answer 1"
