@@ -49,6 +49,6 @@
 Эта игра поможет легко выучить Дотракийский язык. По слову из четырех вариантов ответом Вам нужно выбрать правильный. Вы можете выбирать язык и увидеть правильный ответ в случае ошибки. 
 
 Проект реализовали:
-* Шахбазян Гарик ([gariksh97](http://github.com/gariksh97), garikshgarig@gmail.com)
+* Шахбазян Гарик ([gariksh97](http://github.com/gariksh97), garikshgarik@gmail.com)
 * Трофимов Иван ([kekcik](http://github.com/kekcik), ivan@trofimov.mobi)
 * Шкарупин Данил ([ikefir](http://github.com/ikefir), danshk1311@gmail.com)
