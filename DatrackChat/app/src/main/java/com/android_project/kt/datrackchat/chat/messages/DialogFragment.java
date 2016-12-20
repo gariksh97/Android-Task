@@ -147,6 +147,8 @@ public class DialogFragment extends Fragment {
                             String words[] = new String[parts.length];
                             for (int i = 0; i < parts.length; i++) {
                                 words[i] = parts[i].replaceAll("[^\\w]", "");
+                            }
+                            for (int i = 0; i < parts.length; i++) {
                                 if (!words[i].equals("") &&
                                         dictionaryManager.checkWord(words[i], mainActivity)) {
                                     newMessageText.append(parts[i]).append(" ");
