@@ -6,13 +6,27 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/message_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="2dp"
+        android:id="@+id/textView"
+        android:background="@color/wallet_highlighted_text_holo_dark"
+        android:layout_marginBottom="3dp"
+        android:alpha="0.5"
+        android:layout_marginTop="3dp" />
 
     <TextView
+        android:textSize="14sp"
+        android:id="@+id/message_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Гарик" />
+
+    <TextView
+        android:textSize="17sp"
         android:id="@+id/message_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Купи батон"
+        android:textColor="@color/cast_intro_overlay_background_color" />
 
 </LinearLayout>
