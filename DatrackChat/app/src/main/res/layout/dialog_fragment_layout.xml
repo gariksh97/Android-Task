@@ -1,45 +1,45 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
-
-    <TextView
-        android:text="Dialog Fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView3"
-        android:layout_weight="0.1" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/message_list_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.1"/>
-
+    android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.9">
+        android:orientation="vertical"
+        >
 
-        <EditText
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/message_list_recycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="Name"
-            android:ems="10"
-            android:id="@+id/send_message_text"
-            android:layout_weight="0.1" />
+            android:layout_height="match_parent" />
 
-        <Button
-            android:text="Send"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/send_button"
-            android:layout_weight="0.3" />
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:orientation="horizontal">
 
+            <EditText
+                android:id="@+id/send_message_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="" />
+
+            <Button
+                android:id="@+id/send_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/send" />
+
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

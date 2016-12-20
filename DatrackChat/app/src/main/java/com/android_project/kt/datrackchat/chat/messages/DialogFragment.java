@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class DialogFragment extends Fragment {
     private static final int R_LAYOUT = R.layout.dialog_fragment_layout;
     private DialogItem dialog;
-    private View rootView;
+    private ScrollView rootView;
     private boolean isMessageTryToSend;
     private boolean isChangedText;
 
@@ -65,6 +66,12 @@ public class DialogFragment extends Fragment {
                         (DialogFragment.ChatMessageViewHolder viewHolder, MessageItem model, int position) {
                     viewHolder.message.setText(model.getText());
                     viewHolder.username.setText(FirebaseRequests.decode(model.getName()));
+                    rootView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            rootView.fullScroll(ScrollView.FOCUS_DOWN);
+                        }
+                    });
                 }
             };
 
@@ -105,7 +112,7 @@ public class DialogFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        rootView = inflater.inflate(R_LAYOUT, container, false);
+        rootView = (ScrollView) inflater.inflate(R_LAYOUT, container, false);
         sendButton = (Button) rootView.findViewById(R.id.send_button);
         sendMessageText = (EditText) rootView.findViewById(R.id.send_message_text);
 
@@ -242,6 +249,13 @@ public class DialogFragment extends Fragment {
         isMessageTryToSend = false;
         FirebaseRequests.pushMessage(getDialog(), newMessage);
         sendMessageText.setText("");
+
+        rootView.post(new Runnable() {
+            @Override
+            public void run() {
+                rootView.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });
     }
 
     @Override
@@ -257,7 +271,7 @@ public class DialogFragment extends Fragment {
         bundle.put("isMessageTryToSend", isMessageTryToSend);
         bundle.put("isChangeText", isChangedText);
         Log.d(TAG, "save");
-        outState.putSerializable("arguments", bundle);
+        outState.putParcelable("arguments", bundle);
     }
 
     private static String TAG = "DialogFragment";
