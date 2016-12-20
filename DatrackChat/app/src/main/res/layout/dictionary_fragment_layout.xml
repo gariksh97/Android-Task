@@ -4,8 +4,19 @@
     android:layout_height="match_parent"
     >
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:hint="Search"
+        android:ems="10"
+        android:id="@+id/search_edit"
+        android:layout_weight="0.1" />
+
+
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.9"
         android:id="@+id/dict_recycler"/>
 </LinearLayout>
