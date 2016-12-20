@@ -1,5 +1,10 @@
 package com.android_project.kt.datrackchat.models;
 
+import com.android_project.kt.datrackchat.MainActivity;
+import com.android_project.kt.datrackchat.managers.DictionaryManager;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -11,15 +16,16 @@ public class Game {
     public Integer rightAns = 2;
     public Boolean finish = false;
     public Word[] words = new Word[]{};
-
-    public void startGame() {
+    public void startGame(MainActivity activity) {
         rightAns = rand.nextInt(4);
         finish = false;
+        rand.nextInt();
+        DictionaryManager dm = new DictionaryManager();
         words = new Word[]{
-                new Word("1", "2"),
-                new Word("11", "22"),
-                new Word("111", "222"),
-                new Word("1111", "2222"),
+                dm.getRandomWord(activity),
+                dm.getRandomWord(activity),
+                dm.getRandomWord(activity),
+                dm.getRandomWord(activity)
         };
     }
 }

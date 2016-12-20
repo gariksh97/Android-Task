@@ -12,6 +12,7 @@ import com.android_project.kt.datrackchat.models.Word;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by ivan on 19.12.16.
@@ -21,6 +22,7 @@ public class DictionaryManager {
     private static TypedArray russianDictionary;
     private static TypedArray nativeDictionary;
     private static List<Word> dictionary;
+    private static Random rand = new Random();
 
     private void getDictionaries(MainActivity activity) {
         if (russianDictionary != null) return;
@@ -54,13 +56,16 @@ public class DictionaryManager {
     }
 
     /*
-     *  Note: use flag == true if you want to search into russian
+     *  Note: use flag == true if you want to search into russian dictionary
      */
-    public Word getWord(String word, MainActivity activity, Boolean flag) {
+    public Word getWord(String str, MainActivity activity, Boolean flag) {
         getDictionaries(activity);
-        //Need to implement
+        for (Word word : dictionary) {
+            if ((flag ? word.russianWord : word.nativeWord).equals(str)) return word;
+        }
         return null;
     }
+
     public Boolean checkWord(String word, MainActivity activity) {
         getDictionaries(activity);
         for (int i = 0; i < nativeDictionary.length(); ++i) {
@@ -69,5 +74,14 @@ public class DictionaryManager {
         return false;
     }
 
+    public int wordsAmount(MainActivity activity) {
+        getDictionaries(activity);
+        return nativeDictionary.length();
+    }
+    public Word getRandomWord(MainActivity activity) {
+        getDictionaries(activity);
+        int ind = rand.nextInt(nativeDictionary.length());
+        return new Word(nativeDictionary.getString(ind), russianDictionary.getString(ind));
+    }
     final String LOG = "DictioanryManager";
 }

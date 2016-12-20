@@ -35,75 +35,44 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     Button[] answers = new Button[]{answer1, answer2, answer3, answer4};
     Button change, next;
     TextView problem;
-
+    MainActivity activity;
+    Boolean useNativeDictionary = true;
     Game game;
 
     private void pressAnswer(View v) {
         if (game.finish) return;
         game.finish = true;
-        if (checkAnswer(v)) {
-            v.setBackgroundColor(Color.GREEN);
-        } else {
-            v.setBackgroundColor(Color.RED);
-            switch (v.getId()) {
-                case R.id.ans1:
-                    if (game.rightAns == 0) answer1.setBackgroundColor(Color.GREEN);
-                    break;
-                case R.id.ans2:
-                    if (game.rightAns == 1) answer2.setBackgroundColor(Color.GREEN);
-                    break;
-                case R.id.ans3:
-                    if (game.rightAns == 2) answer3.setBackgroundColor(Color.GREEN);
-                    break;
-                case R.id.ans4:
-                    if (game.rightAns == 3) answer4.setBackgroundColor(Color.GREEN);
-                    break;
-            }
-        }
-    }
-
-    private Boolean checkAnswer(View v) {
-        switch (v.getId()) {
-            case R.id.ans1:
-                if (game.rightAns == 0) return true;
-                break;
-            case R.id.ans2:
-                if (game.rightAns == 1) return true;
-                break;
-            case R.id.ans3:
-                if (game.rightAns == 2) return true;
-                break;
-            case R.id.ans4:
-                if (game.rightAns == 3) return true;
-                break;
-        }
-        return false;
+        v.setBackgroundColor(Color.RED);
+        if (game.rightAns == 0) answer1.setBackgroundColor(Color.GREEN);
+        if (game.rightAns == 1) answer2.setBackgroundColor(Color.GREEN);
+        if (game.rightAns == 2) answer3.setBackgroundColor(Color.GREEN);
+        if (game.rightAns == 3) answer4.setBackgroundColor(Color.GREEN);
     }
 
     private void pressNext() {
         game = new Game();
-        game.startGame();
+        game.startGame(activity);
         answer1.setBackgroundColor(Color.WHITE);
         answer2.setBackgroundColor(Color.WHITE);
         answer3.setBackgroundColor(Color.WHITE);
         answer4.setBackgroundColor(Color.WHITE);
-        answer1.setText(game.words[0].russianWord);
-        answer2.setText(game.words[1].russianWord);
-        answer3.setText(game.words[2].russianWord);
-        answer4.setText(game.words[3].russianWord);
-        problem.setText(game.words[game.rightAns].nativeWord);
+        answer1.setText(useNativeDictionary ? game.words[0].russianWord : game.words[0].nativeWord);
+        answer2.setText(useNativeDictionary ? game.words[1].russianWord : game.words[1].nativeWord);
+        answer3.setText(useNativeDictionary ? game.words[2].russianWord : game.words[2].nativeWord);
+        answer4.setText(useNativeDictionary ? game.words[3].russianWord : game.words[3].nativeWord);
+        problem.setText(useNativeDictionary ? game.words[game.rightAns].nativeWord
+                : game.words[game.rightAns].russianWord);
     }
 
     private void pressChange() {
-        answer1.setBackgroundColor(Color.WHITE);
-        answer2.setBackgroundColor(Color.WHITE);
-        answer3.setBackgroundColor(Color.WHITE);
-        answer4.setBackgroundColor(Color.WHITE);
+        useNativeDictionary = !useNativeDictionary;
+        pressNext();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        activity = getArguments().getParcelable("activity");
         View rootView = inflater.inflate(R_LAYOUT, container, false);
         answer1 = (Button) rootView.findViewById(R.id.ans1);
         answer2 = (Button) rootView.findViewById(R.id.ans2);
