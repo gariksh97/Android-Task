@@ -51,6 +51,10 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private void pressNext() {
         game = new Game();
         game.startGame((MainActivity) getActivity());
+        updateField();
+    }
+
+    private void updateField() {
         answer1.setBackgroundColor(Color.WHITE);
         answer2.setBackgroundColor(Color.WHITE);
         answer3.setBackgroundColor(Color.WHITE);
@@ -62,7 +66,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         problem.setText(useNativeDictionary ? game.words[game.rightAns].nativeWord
                 : game.words[game.rightAns].russianWord);
     }
-
     private void pressChange() {
         useNativeDictionary = !useNativeDictionary;
         pressNext();
@@ -85,7 +88,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         answer4.setOnClickListener(this);
         change.setOnClickListener(this);
         next.setOnClickListener(this);
-        pressNext();
+        if (game == null) pressNext();
+        updateField();
         return rootView;
     }
 

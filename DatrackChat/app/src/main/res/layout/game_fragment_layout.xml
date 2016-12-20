@@ -48,21 +48,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/ans1"
-        android:layout_weight="0.1"/>
+        android:layout_weight="0.1"
+        android:maxLines="1" />
 
     <Button
         android:text="Answer 2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/ans2"
-        android:layout_weight="0.1"/>
+        android:layout_weight="0.1"
+        android:maxLines="1" />
 
     <Button
         android:text="Answer 3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/ans3"
-        android:layout_weight="0.1"/>
+        android:layout_weight="0.1"
+        android:maxLines="1" />
 
     <Button
         android:text="Answer 4"
@@ -70,6 +73,7 @@
         android:layout_height="match_parent"
         android:id="@+id/ans4"
         android:layout_marginBottom="0dp"
-        android:layout_weight="0.1"/>
+        android:layout_weight="0.1"
+        android:maxLines="1" />
 
 </LinearLayout>
