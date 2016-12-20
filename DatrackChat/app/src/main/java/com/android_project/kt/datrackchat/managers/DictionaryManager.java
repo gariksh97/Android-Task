@@ -83,5 +83,5 @@ public class DictionaryManager {
         int ind = rand.nextInt(nativeDictionary.length());
         return new Word(nativeDictionary.getString(ind), russianDictionary.getString(ind));
     }
-    final String LOG = "DictioanryManager";
+    final String LOG = "DictionaryManager";
 }
