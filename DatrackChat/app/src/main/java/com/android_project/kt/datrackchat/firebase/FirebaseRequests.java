@@ -83,9 +83,6 @@ public class FirebaseRequests {
                 .child("dialogs_list");
         pushDialogItem(reference, dialogItem.getFirst_user_uid(), dialogItem);
         pushDialogItem(reference, dialogItem.getSecond_user_uid(), dialogItem);
-        reference.child(dialogItem.getFirst_user_uid())
-                .child(dialogItem.getDialog_uid())
-                .setValue(dialogItem);
     }
 
     private static void pushDialogItem(DatabaseReference reference, String user_uid, DialogItem dialogItem) {
