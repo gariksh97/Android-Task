@@ -37,6 +37,7 @@
             android:id="@+id/problem_label"
             android:layout_height="match_parent"
             android:fontFamily="serif-monospace"
+            android:textStyle="bold"
             android:textSize="30sp"
             android:gravity="top|bottom|center"
             android:clickable="false"

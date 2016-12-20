@@ -83,6 +83,7 @@ public class DictionaryFragment extends Fragment {
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        Log.d(LOG, "Trying get SubDictionary");
                         if (!charSequence.toString().equals("")) {
                             List<Word> subDictionary = manager.getSubDict((MainActivity) getActivity(), charSequence);
                             adapter = new WordRecyclerAdapter(getContext(), subDictionary);
