@@ -24,9 +24,10 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     public GameFragment() {
     }
 
-    public static Fragment newInstance() {
+    public static Fragment newInstance(MainActivity activity) {
         GameFragment fragment = new GameFragment();
         Bundle args = new Bundle();
+        args.putParcelable("activity", activity);
         fragment.setArguments(args);
         return fragment;
     }
