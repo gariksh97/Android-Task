@@ -60,16 +60,18 @@ public class DictionaryManager {
      */
     public Word getWord(String str, MainActivity activity, Boolean flag) {
         getDictionaries(activity);
+        String lowerStr = str.toLowerCase();
         for (Word word : dictionary) {
-            if ((flag ? word.russianWord : word.nativeWord).equals(str)) return word;
+            if ((flag ? word.russianWord : word.nativeWord).equals(lowerStr)) return word;
         }
         return null;
     }
 
     public Boolean checkWord(String word, MainActivity activity) {
         getDictionaries(activity);
+        String lowerWord = word.toLowerCase();
         for (int i = 0; i < nativeDictionary.length(); ++i) {
-            if (word.equals(nativeDictionary.getString(i))) return true;
+            if (lowerWord.equals(nativeDictionary.getString(i).toLowerCase())) return true;
         }
         return false;
     }
