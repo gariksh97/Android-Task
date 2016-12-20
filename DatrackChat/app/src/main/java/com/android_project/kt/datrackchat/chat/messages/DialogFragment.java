@@ -1,5 +1,6 @@
 package com.android_project.kt.datrackchat.chat.messages;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
@@ -69,7 +71,7 @@ public class DialogFragment extends Fragment {
                     rootView.post(new Runnable() {
                         @Override
                         public void run() {
-                            rootView.fullScroll(ScrollView.FOCUS_DOWN);
+                            rootView.scrollTo(0, rootView.getBottom());
                         }
                     });
                 }
@@ -250,13 +252,6 @@ public class DialogFragment extends Fragment {
         isMessageTryToSend = false;
         FirebaseRequests.pushMessage(getDialog(), newMessage);
         sendMessageText.setText("");
-
-        rootView.post(new Runnable() {
-            @Override
-            public void run() {
-                rootView.fullScroll(ScrollView.FOCUS_DOWN);
-            }
-        });
     }
 
     @Override
