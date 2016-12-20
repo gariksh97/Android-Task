@@ -24,8 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity
-        implements Parcelable {
+public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
 
@@ -39,18 +38,6 @@ public class MainActivity extends AppCompatActivity
     public MainActivity() {
         super();
     }
-
-    public static final Creator<MainActivity> CREATOR = new Creator<MainActivity>() {
-        @Override
-        public MainActivity createFromParcel(Parcel in) {
-            return new MainActivity(in);
-        }
-
-        @Override
-        public MainActivity[] newArray(int size) {
-            return new MainActivity[size];
-        }
-    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -103,9 +90,9 @@ public class MainActivity extends AppCompatActivity
 
         if (savedInstanceState == null) {
             fragmentMap = new HashMap<>();
-            fragmentMap.put("DialogList", DialogListFragment.newInstance(this));
-            fragmentMap.put("Dictionary", DictionaryFragment.newInstance(this));
-            fragmentMap.put("Game", GameFragment.newInstance(this));
+            fragmentMap.put("DialogList", DialogListFragment.newInstance());
+            fragmentMap.put("Dictionary", DictionaryFragment.newInstance());
+            fragmentMap.put("Game", GameFragment.newInstance());
             fragmentMap.put("Dialog", DialogFragment.newInstance());
             tabLayout.getTabAt(0).select();
         } else {
@@ -197,12 +184,4 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-    }
 }

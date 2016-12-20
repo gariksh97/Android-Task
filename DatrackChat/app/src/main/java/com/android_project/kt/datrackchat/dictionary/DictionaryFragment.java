@@ -40,11 +40,10 @@ public class DictionaryFragment extends Fragment {
         }
     }
 
-    public static Fragment newInstance(MainActivity activity) {
+    public static Fragment newInstance() {
         DictionaryFragment fragment = new DictionaryFragment();
 
         Bundle args = new Bundle();
-        args.putParcelable("activity", activity);
         fragment.setArguments(args);
 
         return fragment;
@@ -59,10 +58,11 @@ public class DictionaryFragment extends Fragment {
                              Bundle savedInstanceState) {
         Log.d(LOG, "started creating");
         rootView = inflater.inflate(R_LAYOUT, container, false);
-        MainActivity activity = getArguments().getParcelable("activity");
         recyclerView = (RecyclerView) rootView.findViewById(R.id.dict_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        if (dictionary == null) dictionary = (new DictionaryManager()).getWholeDictionary(activity);
+        if (dictionary == null) dictionary = (new DictionaryManager()).getWholeDictionary(
+                (MainActivity) getActivity()
+        );
         if (adapter == null) {
             adapter = new WordRecyclerAdapter(getContext(), dictionary);
         }

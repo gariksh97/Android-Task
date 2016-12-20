@@ -24,10 +24,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     public GameFragment() {
     }
 
-    public static Fragment newInstance(MainActivity activity) {
+    public static Fragment newInstance() {
         GameFragment fragment = new GameFragment();
         Bundle args = new Bundle();
-        args.putParcelable("activity", activity);
         fragment.setArguments(args);
         return fragment;
     }
@@ -36,7 +35,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     Button[] answers = new Button[]{answer1, answer2, answer3, answer4};
     Button change, next;
     TextView problem;
-    MainActivity activity;
     Boolean useNativeDictionary = true;
     Game game;
 
@@ -52,7 +50,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
     private void pressNext() {
         game = new Game();
-        game.startGame(activity);
+        game.startGame((MainActivity) getActivity());
         answer1.setBackgroundColor(Color.WHITE);
         answer2.setBackgroundColor(Color.WHITE);
         answer3.setBackgroundColor(Color.WHITE);
@@ -73,7 +71,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        activity = getArguments().getParcelable("activity");
         View rootView = inflater.inflate(R_LAYOUT, container, false);
         answer1 = (Button) rootView.findViewById(R.id.ans1);
         answer2 = (Button) rootView.findViewById(R.id.ans2);

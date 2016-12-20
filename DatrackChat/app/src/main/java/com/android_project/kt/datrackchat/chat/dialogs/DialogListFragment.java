@@ -62,13 +62,11 @@ public class DialogListFragment extends Fragment {
     }
 
 
-    public static Fragment newInstance
-            (MainActivity activity) {
+    public static Fragment newInstance() {
         DialogListFragment fragment = new DialogListFragment();
 
         Bundle args = new Bundle();
         ArgumentsBundle bundle = new ArgumentsBundle();
-        bundle.put("activity", activity);
         args.putSerializable("arguments", bundle);
         fragment.setArguments(args);
         Log.d("MyLog", "New Instance");

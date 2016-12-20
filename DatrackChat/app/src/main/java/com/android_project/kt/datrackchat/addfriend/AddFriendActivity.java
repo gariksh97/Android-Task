@@ -107,6 +107,7 @@ public class AddFriendActivity extends AppCompatActivity {
                             }
                         };
                         recyclerView.setAdapter(firebaseAdapter);
+                        firebaseAdapter.notifyDataSetChanged();
                     }
 
                     @Override

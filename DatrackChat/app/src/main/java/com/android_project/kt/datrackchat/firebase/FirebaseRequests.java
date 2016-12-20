@@ -81,12 +81,27 @@ public class FirebaseRequests {
         dialogItem.setData(item.getData());
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
                 .child("dialogs_list");
+        pushDialogItem(reference, dialogItem.getFirst_user_uid(), dialogItem);
+        pushDialogItem(reference, dialogItem.getSecond_user_uid(), dialogItem);
         reference.child(dialogItem.getFirst_user_uid())
                 .child(dialogItem.getDialog_uid())
                 .setValue(dialogItem);
-        reference.child(dialogItem.getSecond_user_uid())
-                .child(dialogItem.getDialog_uid())
-                .setValue(dialogItem);
+    }
+
+    private static void pushDialogItem(DatabaseReference reference, String user_uid, DialogItem dialogItem) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user_uid.equals(user.getUid())) {
+            reference.child(user_uid)
+                    .child(dialogItem.getDialog_uid())
+                    .setValue(dialogItem);
+        } else  {
+            String name = dialogItem.getName();
+            dialogItem.setName(user.getDisplayName());
+            reference.child(user_uid)
+                    .child(dialogItem.getDialog_uid())
+                    .setValue(dialogItem);
+            dialogItem.setName(name);
+        }
     }
 
     public static void addFriend(FriendItem friendItem) {
