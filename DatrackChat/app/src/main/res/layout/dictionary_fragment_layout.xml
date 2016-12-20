@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:orientation="vertical">
 
     <EditText
+        android:id="@+id/search_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:hint="Search"
+        android:layout_weight="0.1"
         android:ems="10"
-        android:id="@+id/search_edit"
-        android:layout_weight="0.1" />
+        android:hint="Search"
+        android:text="" />
 
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/dict_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.9"
-        android:id="@+id/dict_recycler"/>
+        android:layout_weight="0.9" />
 </LinearLayout>

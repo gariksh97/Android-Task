@@ -30,7 +30,8 @@ import java.util.Set;
 public class DictionaryFragment extends Fragment {
     private static final int R_LAYOUT = R.layout.dictionary_fragment_layout;
 
-    public DictionaryFragment() {}
+    public DictionaryFragment() {
+    }
 
     private View rootView;
 
@@ -80,8 +81,12 @@ public class DictionaryFragment extends Fragment {
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        List<Word> subDictionary = getSubDict(charSequence);
-                        adapter = new WordRecyclerAdapter(getContext(), subDictionary);
+                        if (!charSequence.toString().equals("")) {
+                            List<Word> subDictionary = getSubDict(charSequence);
+                            adapter = new WordRecyclerAdapter(getContext(), subDictionary);
+                        } else {
+                            adapter = new WordRecyclerAdapter(getContext(), dictionary);
+                        }
                         recyclerView.setAdapter(adapter);
                     }
 
@@ -101,8 +106,7 @@ public class DictionaryFragment extends Fragment {
             for (Word word : dictionary) {
                 if (word.nativeWord.startsWith(chars.toString())) subDict.add(word);
             }
-        }
-        else if (chars.toString().matches("^[А-Яа-я]+$")) {
+        } else if (chars.toString().matches("^[А-Яа-я]+$")) {
             String[] subWords;
             for (Word word : dictionary) {
                 subWords = word.russianWord.split(" ");

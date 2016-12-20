@@ -17,7 +17,7 @@ import java.util.List;
  * Created by danilskarupin on 19.12.16.
  */
 
-class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapter.WordViewHolder>{
+class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapter.WordViewHolder> {
 
     @NonNull
     private List<Word> data;

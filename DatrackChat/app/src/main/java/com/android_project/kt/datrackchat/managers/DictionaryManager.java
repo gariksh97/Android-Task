@@ -78,10 +78,12 @@ public class DictionaryManager {
         getDictionaries(activity);
         return nativeDictionary.length();
     }
+
     public Word getRandomWord(MainActivity activity) {
         getDictionaries(activity);
         int ind = rand.nextInt(nativeDictionary.length());
         return new Word(nativeDictionary.getString(ind), russianDictionary.getString(ind));
     }
+
     final String LOG = "DictionaryManager";
 }
