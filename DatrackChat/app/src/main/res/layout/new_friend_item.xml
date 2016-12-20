@@ -6,19 +6,25 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/new_friend_email"
-        android:text="Name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:background="@android:color/holo_orange_dark"
-        android:textSize="30sp" />
-    <TextView
         android:id="@+id/new_friend_name"
         android:text="Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:background="@android:color/holo_orange_dark"
-        android:textSize="30sp" />
+        android:background="@color/wallet_highlighted_text_holo_dark"
+        android:textSize="22sp"
+        android:paddingTop="8dp"
+        android:paddingLeft="10dp"
+        android:textColor="?attr/actionMenuTextColor" />
+
+    <TextView
+        android:id="@+id/new_friend_email"
+        android:text="Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/wallet_highlighted_text_holo_dark"
+        android:textSize="18sp"
+        android:paddingBottom="8dp"
+        android:paddingTop="4dp"
+        android:paddingLeft="10dp" />
+
 </LinearLayout>
