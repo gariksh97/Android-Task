@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +18,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android_project.kt.datrackchat.ArgumentsBundle;
+import com.android_project.kt.datrackchat.MainActivity;
 import com.android_project.kt.datrackchat.R;
 import com.android_project.kt.datrackchat.chat.dialogs.DialogItem;
 import com.android_project.kt.datrackchat.firebase.FirebaseRequests;
+import com.android_project.kt.datrackchat.managers.DictionaryManager;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -33,20 +37,23 @@ public class DialogFragment extends Fragment {
     private boolean isMessageTryToSend;
     private boolean isChangedText;
 
+    private FirebaseRecyclerAdapter<MessageItem, DialogFragment.ChatMessageViewHolder>
+            adapter;
+    private RecyclerView recyclerView;
+    private LinearLayoutManager layoutManager;
+
+    private Button sendButton;
+    private EditText sendMessageText;
+
     public void setDialog(DialogItem dialog) {
         this.dialog = dialog;
-        restart();
+        adapter = null;
     }
 
     private void restart() {
-        isMessageTryToSend = false;
-        isChangedText = false;
-        DatabaseReference messagesDatabaseReference =
-                FirebaseDatabase.getInstance().getReference();
-        if (rootView != null) {
-            if (adapter != null) {
-                adapter.cleanup();
-            }
+        if (adapter == null) {
+            isMessageTryToSend = false;
+            isChangedText = true;
             adapter = new FirebaseRecyclerAdapter<MessageItem, DialogFragment.ChatMessageViewHolder>(
                     MessageItem.class,
                     R.layout.message_item,
@@ -67,9 +74,6 @@ public class DialogFragment extends Fragment {
                     super.onItemRangeInserted(positionStart, itemCount);
                 }
             });
-
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setAdapter(adapter);
         }
     }
 
@@ -86,13 +90,6 @@ public class DialogFragment extends Fragment {
         return fragment;
     }
 
-    private FirebaseRecyclerAdapter<MessageItem, DialogFragment.ChatMessageViewHolder>
-            adapter;
-    private RecyclerView recyclerView;
-    private LinearLayoutManager layoutManager;
-
-    private Button sendButton;
-    private EditText sendMessageText;
 
     public static class ChatMessageViewHolder extends RecyclerView.ViewHolder {
         TextView message;
@@ -109,62 +106,86 @@ public class DialogFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R_LAYOUT, container, false);
-
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.message_list_recycler);
-        layoutManager = new LinearLayoutManager(this.getActivity());
-        layoutManager.setStackFromEnd(true);
-        recyclerView.setLayoutManager(layoutManager);
-
         sendButton = (Button) rootView.findViewById(R.id.send_button);
         sendMessageText = (EditText) rootView.findViewById(R.id.send_message_text);
 
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onClick(View view) {
-                if (sendMessageText.getText().toString().trim().equals(""))
-                    return;
+        final DictionaryManager dictionaryManager = new DictionaryManager();
+        final MainActivity mainActivity = (MainActivity) getActivity();
+        dictionaryManager.getWholeDictionary(mainActivity);
+        if (savedInstanceState == null) {
+            Log.d(TAG, "start");
+            restart();
+        } else {
+            ArgumentsBundle bundle = (ArgumentsBundle) savedInstanceState.get("arguments");
+            Log.d(TAG, "load");
+            sendMessageText.setText(
+                    (String) bundle.get("sendMessageText")
+            );
+            sendMessageText.setSelection(
+                    (int) bundle.get("sendMessageTextPos")
+            );
+            adapter = (FirebaseRecyclerAdapter<MessageItem, ChatMessageViewHolder>)
+                    bundle.get("adapter");
+            dialog = (DialogItem) bundle.get("dialog");
+            isMessageTryToSend = (boolean) bundle.get("isMessageTryToSend");
+            isChangedText = (boolean) bundle.get("isChangeText");
+        }
 
-                boolean anyNotDatrackWord = false;
+        sendButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (sendMessageText.getText().toString().trim().equals(""))
+                            return;
 
-                if (!isMessageTryToSend) {
-                    StringBuilder newMessageText = new StringBuilder();
-                    String text = sendMessageText.getText().toString();
-                    String parts[] = text.split("\\s+");
-                    String words[] = new String[parts.length];
-                    for (int i = 0; i < parts.length; i++) {
-                        words[i] = parts[i].replaceAll("[^\\w]", "");
-                        if (!words[i].equals("") && true) {
-                            anyNotDatrackWord = true;
-                            newMessageText.append("<font color=#63a34a>")
-                                    .append(parts[i])
-                                    .append("</font>").append(" ");
+                        boolean anyNotDatrackWord = false;
+
+                        if (!isMessageTryToSend) {
+                            StringBuilder newMessageText = new StringBuilder();
+                            String text = sendMessageText.getText().toString();
+                            String parts[] = text.split("\\s+");
+                            String words[] = new String[parts.length];
+                            for (int i = 0; i < parts.length; i++) {
+                                words[i] = parts[i].replaceAll("[^\\w]", "");
+                                if (!words[i].equals("") &&
+                                        dictionaryManager.checkWord(words[i], mainActivity)) {
+                                    newMessageText.append(parts[i]).append(" ");
+
+                                } else if (i + 1 != parts.length &&
+                                        !words[i].equals("") && !words[i + 1].equals("") &&
+                                        dictionaryManager.checkWord(
+                                                words[i] + " " + words[i + 1],
+                                                mainActivity
+                                        )) {
+                                    newMessageText.append(parts[i]).append(" ");
+                                } else {
+                                    anyNotDatrackWord = true;
+                                    newMessageText.append("<font color=#63a34a>")
+                                            .append(parts[i])
+                                            .append("</font>").append(" ");
+                                }
+                            }
+                            if (anyNotDatrackWord) {
+                                Toast.makeText(
+                                        getContext(),
+                                        "Some words are not in datrack",
+                                        Toast.LENGTH_LONG
+                                ).show();
+                                sendMessageText.setText(Html.fromHtml(
+                                        newMessageText.toString()
+                                ));
+                                isMessageTryToSend = true;
+                                isChangedText = false;
+                            } else {
+                                sendMessage();
+                                isMessageTryToSend = false;
+                            }
                         } else {
-                            newMessageText.append(parts[i]).append(" ");
+                            sendMessage();
+                            isMessageTryToSend = false;
                         }
                     }
-                    if (anyNotDatrackWord) {
-                        Toast.makeText(
-                                getContext(),
-                                "Some words are not in datrack",
-                                Toast.LENGTH_LONG
-                        ).show();
-                        sendMessageText.setText(Html.fromHtml(
-                                newMessageText.toString()
-                        ));
-                        isMessageTryToSend = true;
-                        isChangedText = false;
-                    } else {
-                        sendMessage();
-                        isMessageTryToSend = false;
-                    }
-                } else {
-                    sendMessage();
-                    isMessageTryToSend = false;
-                }
-            }
-        });
-
+                });
         sendMessageText.addTextChangedListener(
                 new TextWatcher() {
                     @Override
@@ -175,7 +196,9 @@ public class DialogFragment extends Fragment {
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                         isMessageTryToSend = false;
+                        int pos = sendMessageText.getSelectionStart();
                         if (!isChangedText) {
+                            isChangedText = true;
                             StringBuilder newMessageText = new StringBuilder();
                             String text = sendMessageText.getText().toString();
                             String parts[] = text.split("\\s+");
@@ -183,7 +206,7 @@ public class DialogFragment extends Fragment {
                                 newMessageText.append(parts[iter]).append(" ");
                             }
                             sendMessageText.setText(newMessageText.toString());
-                            isChangedText = true;
+                            sendMessageText.setSelection(Math.min(newMessageText.length(), pos));
                         }
                     }
 
@@ -192,7 +215,13 @@ public class DialogFragment extends Fragment {
 
                     }
                 });
-        restart();
+
+
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.message_list_recycler);
+        layoutManager = new LinearLayoutManager(this.getActivity());
+        layoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
 
         return rootView;
     }
@@ -212,4 +241,22 @@ public class DialogFragment extends Fragment {
         FirebaseRequests.pushMessage(getDialog(), newMessage);
         sendMessageText.setText("");
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        adapter = null;
+
+        ArgumentsBundle bundle = new ArgumentsBundle();
+        bundle.put("sendMessageText", sendMessageText.getText().toString());
+        bundle.put("sendMessageTextPos", sendMessageText.getSelectionStart());
+        bundle.put("adapter", adapter);
+        bundle.put("dialog", dialog);
+        bundle.put("isMessageTryToSend", isMessageTryToSend);
+        bundle.put("isChangeText", isChangedText);
+        Log.d(TAG, "save");
+        outState.putSerializable("arguments", bundle);
+    }
+
+    private static String TAG = "DialogFragment";
 }

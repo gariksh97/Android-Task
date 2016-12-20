@@ -1,5 +1,6 @@
 package com.android_project.kt.datrackchat.addfriend;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android_project.kt.datrackchat.MainActivity;
 import com.android_project.kt.datrackchat.R;
 import com.android_project.kt.datrackchat.firebase.FirebaseRequests;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -116,5 +118,11 @@ public class AddFriendActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(firebaseAdapter);
+    }
+
+    @Override
+    public void finish() {
+        startActivity(new Intent(this, MainActivity.class));
+        super.finish();
     }
 }

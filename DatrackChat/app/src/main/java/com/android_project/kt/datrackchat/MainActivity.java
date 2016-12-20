@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -59,13 +60,10 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        fragmentMap = new HashMap<>();
-
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.addTab(tabLayout.newTab().setText("Chat"));
         tabLayout.addTab(tabLayout.newTab().setText("Dictionary"));
         tabLayout.addTab(tabLayout.newTab().setText("Game"));
-
         tabLayout.addOnTabSelectedListener(
                 new TabLayout.OnTabSelectedListener() {
                     @Override
@@ -88,30 +86,52 @@ public class MainActivity extends AppCompatActivity
                         switch (position) {
                             case 0:
                                 if (isDialog)
-                                    changeFragment("Dialog", position);
+                                    changeFragment("Dialog");
                                 else
-                                    changeFragment("DialogList", position);
+                                    changeFragment("DialogList");
                                 break;
                             case 1:
-                                changeFragment("Dictionary", position);
+                                changeFragment("Dictionary");
                                 break;
                             case 2:
-                                changeFragment("Game", position);
+                                changeFragment("Game");
                                 break;
                         }
                     }
                 }
         );
 
-        fragmentMap.put("DialogList", DialogListFragment.newInstance(this));
-        fragmentMap.put("Dictionary", DictionaryFragment.newInstance(this));
-        fragmentMap.put("Game", GameFragment.newInstance(this));
-        fragmentMap.put("Dialog", DialogFragment.newInstance());
-        tabLayout.getTabAt(0).select();
+        if (savedInstanceState == null) {
+            fragmentMap = new HashMap<>();
+            fragmentMap.put("DialogList", DialogListFragment.newInstance(this));
+            fragmentMap.put("Dictionary", DictionaryFragment.newInstance(this));
+            fragmentMap.put("Game", GameFragment.newInstance(this));
+            fragmentMap.put("Dialog", DialogFragment.newInstance());
+            tabLayout.getTabAt(0).select();
+        } else {
+            ArgumentsBundle argumentsBundle = (ArgumentsBundle) savedInstanceState.getSerializable("arguments");
+            fragmentMap = (Map<String, Fragment>) argumentsBundle.get("fragmentMap");
+            selectedFragment = (Fragment) argumentsBundle.get("selectedFragment");
+            isDialog = (boolean) argumentsBundle.get("isDialog");
+            tabLayout.getTabAt(
+                    (Integer) argumentsBundle.get("position")
+            ).select();
+        }
     }
 
 
-    public void changeFragment(String fragmentString, int pos) {
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        ArgumentsBundle argumentsBundle = new ArgumentsBundle();
+        argumentsBundle.put("selectedFragment", selectedFragment);
+        argumentsBundle.put("fragmentMap", fragmentMap);
+        argumentsBundle.put("position", tabLayout.getSelectedTabPosition());
+        argumentsBundle.put("isDialog", isDialog);
+        outState.putSerializable("arguments", argumentsBundle);
+    }
+
+    public void changeFragment(String fragmentString) {
         Fragment fragment = fragmentMap.get(fragmentString);
         if (selectedFragment == null) {
             getSupportFragmentManager().beginTransaction()
@@ -130,7 +150,7 @@ public class MainActivity extends AppCompatActivity
     public void onBackPressed() {
         if (isDialog && tabLayout.getSelectedTabPosition() == 0) {
             isDialog = false;
-            changeFragment("DialogList", 0);
+            changeFragment("DialogList");
             return;
         }
         super.onBackPressed();
@@ -171,6 +191,7 @@ public class MainActivity extends AppCompatActivity
             return true;
         } else if (id == R.id.action_add_friend) {
             startActivity(new Intent(MainActivity.this, AddFriendActivity.class));
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
