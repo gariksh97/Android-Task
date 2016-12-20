@@ -1,6 +1,6 @@
 # DatractChat. Android приложение.
 
-<div> 
+<div align="center">
   <img width="100%" src="img/upper.png" alt="About screen" title="About screen"</img>
 </div>
 
@@ -13,10 +13,12 @@
 #### Чат
 
 Основной разработчик: Шахбазян Гарик
-<div> 
-  <img width="30%" src="img/chat1.png" alt="About screen" title="About screen"</img>
-  <img width="30%" src="img/chat2.png" alt="About screen" title="About screen"</img>
-  <img width="30%" src="img/chat3.png" alt="About screen" title="About screen"</img>
+<div align="center">
+  <img width="25%" src="img/chat1.png" alt="About screen" title="About screen"</img>
+  <img height="0" width="8px">
+  <img width="25%" src="img/chat2.png" alt="About screen" title="About screen"</img>
+  <img height="0" width="8px">
+  <img width="25%" src="img/chat3.png" alt="About screen" title="About screen"</img>
 </div>
 В чате поддерживают диалоги с разными пользователями, которые зарегистрированы в приложении. 
 Сообщения и список диалогов обновляются автоматически в реальном времени.
@@ -25,20 +27,24 @@
 #### Словарь 
 
 Основной разработчик: Шкарупин Данил 
-<div> 
-  <img width="30%" src="img/dic1.png" alt="About screen" title="About screen"</img>
-  <img width="30%" src="img/dic2.png" alt="About screen" title="About screen"</img>
-  <img width="30%" src="img/dic3.png" alt="About screen" title="About screen"</img>
+<div align="center">
+  <img width="25%" src="img/dic1.png" alt="About screen" title="About screen"</img>
+  <img height="0" width="8px">
+  <img width="25%" src="img/dic2.png" alt="About screen" title="About screen"</img>
+  <img height="0" width="8px">
+  <img width="25%" src="img/dic3.png" alt="About screen" title="About screen"</img>
 </div>
 Словарь основывается базаруется на [Wiki Dothraki](http://wiki.dothraki.org/Vocabulary) и содержит 350 слов и словосочетаний. Поддерживается поиск на разных языках. 
 
 #### Игра "Карточки"
 
 Основной разработчик: Трофимов Иван
-<div> 
-  <img width="30%" src="img/game1.png" alt="About screen" title="About screen"</img>
-  <img width="30%" src="img/game2.png" alt="About screen" title="About screen"</img>
-  <img width="30%" src="img/game3.png" alt="About screen" title="About screen"</img>
+<div align="center">
+  <img width="25%" src="img/game1.png" alt="About screen" title="About screen"</img>
+  <img height="0" width="8px">
+  <img width="25%" src="img/game2.png" alt="About screen" title="About screen"</img>
+  <img height="0" width="8px">
+  <img width="25%" src="img/game3.png" alt="About screen" title="About screen"</img>
 </div>
 Эта игра поможет легко выучить Дотракийский язык. По слову из четырех вариантов ответом Вам нужно выбрать правильно. Вы можете выбирать язык и увидеть правильный ответ в случае ошибки. 
 
