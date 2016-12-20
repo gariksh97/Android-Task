@@ -67,7 +67,6 @@ public class DialogListFragment extends Fragment {
 
         Bundle args = new Bundle();
         ArgumentsBundle bundle = new ArgumentsBundle();
-        args.putSerializable("arguments", bundle);
         fragment.setArguments(args);
         Log.d("MyLog", "New Instance");
 
@@ -109,7 +108,7 @@ public class DialogListFragment extends Fragment {
                 });
             }
         } else {
-            ArgumentsBundle argumentsBundle = (ArgumentsBundle) savedInstanceState.getSerializable("arguments");
+            ArgumentsBundle argumentsBundle = (ArgumentsBundle) savedInstanceState.getParcelable("arguments");
             firebaseAdapter = (FirebaseRecyclerAdapter<DialogItem, DialogViewHolder>)
                     argumentsBundle.get("firebaseAdapter");
         }
@@ -131,6 +130,6 @@ public class DialogListFragment extends Fragment {
         super.onSaveInstanceState(outState);
         ArgumentsBundle bundle = new ArgumentsBundle();
         bundle.put("firebaseAdapter", firebaseAdapter);
-        outState.putSerializable("arguments", bundle);
+        outState.putParcelable("arguments", bundle);
     }
 }

@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             fragmentMap.put("Dialog", DialogFragment.newInstance());
             tabLayout.getTabAt(0).select();
         } else {
-            ArgumentsBundle argumentsBundle = (ArgumentsBundle) savedInstanceState.getSerializable("arguments");
+            ArgumentsBundle argumentsBundle = (ArgumentsBundle) savedInstanceState.getParcelable("arguments");
             fragmentMap = (Map<String, Fragment>) argumentsBundle.get("fragmentMap");
             selectedFragment = (Fragment) argumentsBundle.get("selectedFragment");
             isDialog = (boolean) argumentsBundle.get("isDialog");
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         argumentsBundle.put("fragmentMap", fragmentMap);
         argumentsBundle.put("position", tabLayout.getSelectedTabPosition());
         argumentsBundle.put("isDialog", isDialog);
-        outState.putSerializable("arguments", argumentsBundle);
+        outState.putParcelable("arguments", argumentsBundle);
     }
 
     public void changeFragment(String fragmentString) {
@@ -161,10 +161,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            return true;
-            //TODO: Добавить настройки
-        } else if (id == R.id.action_log_out) {
+        if (id == R.id.action_log_out) {
             if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                 FirebaseAuth.getInstance().signOut();
 
