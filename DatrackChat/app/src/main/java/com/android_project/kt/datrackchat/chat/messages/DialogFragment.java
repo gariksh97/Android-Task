@@ -166,10 +166,11 @@ public class DialogFragment extends Fragment {
                                                 words[i] + " " + words[i + 1],
                                                 mainActivity
                                         )) {
-                                    newMessageText.append(parts[i]).append(" ");
+                                    newMessageText.append(parts[i]).append(" ")
+                                            .append(parts[++i]).append(" ");
                                 } else {
                                     anyNotDatrackWord = true;
-                                    newMessageText.append("<font color=#63a34a>")
+                                    newMessageText.append("<font color=#ff0000>")
                                             .append(parts[i])
                                             .append("</font>").append(" ");
                                 }
