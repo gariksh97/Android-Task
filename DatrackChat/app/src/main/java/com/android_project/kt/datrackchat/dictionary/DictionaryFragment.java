@@ -56,6 +56,7 @@ public class DictionaryFragment extends Fragment {
     List<Word> dictionary;
     RecyclerView recyclerView;
     WordRecyclerAdapter adapter;
+    DictionaryManager manager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,7 +65,8 @@ public class DictionaryFragment extends Fragment {
         rootView = inflater.inflate(R_LAYOUT, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.dict_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        if (dictionary == null) dictionary = (new DictionaryManager()).getWholeDictionary(
+        if (manager == null) manager = new DictionaryManager();
+        if (dictionary == null) dictionary = manager.getWholeDictionary(
                 (MainActivity) getActivity()
         );
         if (adapter == null) {
@@ -82,7 +84,7 @@ public class DictionaryFragment extends Fragment {
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                         if (!charSequence.toString().equals("")) {
-                            List<Word> subDictionary = getSubDict(charSequence);
+                            List<Word> subDictionary = manager.getSubDict((MainActivity) getActivity(), charSequence);
                             adapter = new WordRecyclerAdapter(getContext(), subDictionary);
                         } else {
                             adapter = new WordRecyclerAdapter(getContext(), dictionary);
@@ -98,27 +100,6 @@ public class DictionaryFragment extends Fragment {
         );
         Log.d(LOG, "ended creating");
         return rootView;
-    }
-
-    private List<Word> getSubDict(CharSequence chars) {
-        List<Word> subDict = new ArrayList<>();
-        if (chars.toString().matches("^[A-Za-z]+$")) {
-            for (Word word : dictionary) {
-                if (word.nativeWord.startsWith(chars.toString())) subDict.add(word);
-            }
-        } else if (chars.toString().matches("^[А-Яа-я]+$")) {
-            String[] subWords;
-            for (Word word : dictionary) {
-                subWords = word.russianWord.split(" ");
-                for (String subWord : subWords) {
-                    if (subWord.startsWith(chars.toString())) {
-                        subDict.add(word);
-                        break;
-                    }
-                }
-            }
-        }
-        return subDict;
     }
 
     @Override

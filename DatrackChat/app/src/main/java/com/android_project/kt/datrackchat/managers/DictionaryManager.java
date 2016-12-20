@@ -50,6 +50,29 @@ public class DictionaryManager {
         return dictionary;
     }
 
+    public List<Word> getSubDict(MainActivity activity, CharSequence chars) {
+        if (dictionary == null) getDictionaries(activity);
+        List<Word> subDict = new ArrayList<>();
+        String searchString = chars.toString().toLowerCase();
+        if (searchString.matches("^[a-z]+$")) {
+            for (Word word : dictionary) {
+                if (word.nativeWord.startsWith(searchString)) subDict.add(word);
+            }
+        } else if (searchString.matches("^[а-я]+$")) {
+            String[] subWords;
+            for (Word word : dictionary) {
+                subWords = word.russianWord.split(" ");
+                for (String subWord : subWords) {
+                    if (subWord.startsWith(searchString)) {
+                        subDict.add(word);
+                        break;
+                    }
+                }
+            }
+        }
+        return subDict;
+    }
+
     public Word getWord(Integer ind, MainActivity activity) {
         getDictionaries(activity);
         return new Word(nativeDictionary.getString(ind), russianDictionary.getString(ind));
