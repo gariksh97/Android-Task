@@ -1,5 +1,8 @@
-# Android-Task
-# Проектная работа Android
+# DatractChat. Android приложение.
+
+<div> 
+  <img width="30%" src="img/upper.png" alt="About screen" title="About screen"</img>
+</div>
 
 Описание:
 
