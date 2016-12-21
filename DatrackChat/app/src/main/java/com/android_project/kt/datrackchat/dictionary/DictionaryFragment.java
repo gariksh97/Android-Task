@@ -69,9 +69,7 @@ public class DictionaryFragment extends Fragment {
         if (dictionary == null) dictionary = manager.getWholeDictionary(
                 (MainActivity) getActivity()
         );
-        if (adapter == null) {
-            adapter = new WordRecyclerAdapter(getContext(), dictionary);
-        }
+        adapter = new WordRecyclerAdapter(getContext(), dictionary);
         recyclerView.setAdapter(adapter);
         EditText editText = (EditText) rootView.findViewById(R.id.search_edit);
         editText.addTextChangedListener(
